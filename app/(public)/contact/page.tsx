@@ -98,20 +98,21 @@ export default async function ContactPage() {
 
         {/* Right Column: Quick Action Box & Highlands Map Placeholder */}
         <div className="space-y-6">
-          <div className="rounded-3xl bg-highland-950 text-white p-8 space-y-5 shadow-lg">
-            <h3 className="font-heading text-2xl font-bold">Visiting This Sunday?</h3>
-            <p className="text-xs sm:text-sm text-highland-200 leading-relaxed">
-              We look forward to hosting you in God's presence. Our welcoming ushers will guide you to parking, seating, and age-appropriate children’s church classes.
+          <div className="rounded-3xl bg-gradient-to-b from-white via-highland-50/40 to-neutral-50/80 border-2 border-highland-100 p-8 space-y-4 shadow-lg">
+            <Badge variant="clay">First-Time Guest</Badge>
+            <h3 className="font-heading text-2xl font-bold text-neutral-900">Visiting This Sunday?</h3>
+            <p className="text-sm text-neutral-600 leading-relaxed">
+              We look forward to hosting you in God&apos;s presence. Our welcoming ushers will guide you to parking, seating, and age-appropriate children’s church classes.
             </p>
 
             <div className="space-y-3 pt-2">
               <Link href="/register" className="block">
-                <Button variant="clay" className="w-full justify-center">
+                <Button variant="clay" className="w-full justify-center font-bold shadow-md">
                   Register as a Visitor / Member
                 </Button>
               </Link>
               <Link href="/prayer" className="block">
-                <Button variant="outline" className="w-full justify-center text-white border-white/20 hover:bg-white/10">
+                <Button variant="outline" className="w-full justify-center border-neutral-300 text-neutral-800 hover:bg-neutral-100 font-semibold">
                   Send a Prayer Request
                 </Button>
               </Link>

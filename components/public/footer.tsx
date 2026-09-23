@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Heart, Lock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Heart } from "lucide-react";
 
 export function Footer() {
   return (
@@ -69,8 +69,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/prayer" className="hover:text-white transition-colors">
-                  Submit a Prayer Request
+                <Link href="/salvation" className="text-ochre-300 hover:text-white transition-colors font-medium">
+                  New Converts Registration (Salvation)
                 </Link>
               </li>
               <li>
@@ -82,6 +82,16 @@ export function Footer() {
                 <Link href="/give" className="hover:text-white transition-colors">
                   Church Giving (MoMo / Airtel / Bank)
                 </Link>
+              </li>
+              <li className="pt-1 border-t border-neutral-800">
+                <a
+                  href="https://phaneroo.org/live/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-highland-400 hover:text-white transition-colors flex items-center gap-1 font-medium"
+                >
+                  <span>Phaneroo Live Broadcasts ↗</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -136,17 +146,30 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-highland-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <p>© {new Date().getFullYear()} Manifest Kapchorwa. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link href="/give" className="hover:text-white transition-colors">
               Giving
             </Link>
             <Link href="/contact" className="hover:text-white transition-colors">
               Contact
             </Link>
-            <Link href="/admin/login" className="flex items-center gap-1 text-highland-300 hover:text-white transition-colors">
-              <Lock className="h-3 w-3" />
-              <span>Admin Portal</span>
-            </Link>
+            <span className="text-neutral-700 hidden sm:inline">|</span>
+            <a
+              href="https://phaneroo.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-highland-400 hover:text-white transition-colors"
+            >
+              Phaneroo Global ↗
+            </a>
+            <a
+              href="https://phaneroo.org/broadcast/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ochre-400 hover:text-white transition-colors"
+            >
+              Manifest TV ↗
+            </a>
           </div>
         </div>
       </div>

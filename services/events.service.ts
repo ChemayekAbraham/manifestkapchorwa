@@ -44,6 +44,7 @@ export class EventsService {
                 id: true,
                 fullName: true,
                 phone: true,
+                email: true,
                 category: true,
                 village: true,
                 status: true,

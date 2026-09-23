@@ -5,6 +5,7 @@ export const DevotionSchema = z.object({
   slug: z.string().max(200).optional(),
   excerpt: z.string().max(500).optional().nullable(),
   content: z.string().min(10, "Devotion content must be at least 10 characters"),
+  imageUrl: z.string().optional().nullable(),
   author: z.string().max(100).default("Pastor / Ministry Team"),
   published: z.boolean().default(false),
   publishedAt: z.string().optional().nullable(),

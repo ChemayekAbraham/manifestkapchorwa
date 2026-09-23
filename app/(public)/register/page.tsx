@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,7 +28,11 @@ interface RegistrationFormData {
   website_hp?: string; // Honeypot field
 }
 
-export default function RegisterPage() {
+function RegisterFormContent() {
+  const searchParams = useSearchParams();
+  const initialEmail = searchParams.get("email") || "";
+  const initialName = searchParams.get("name") || "";
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successData, setSuccessData] = useState<{ id: string; fullName: string } | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -35,15 +40,24 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
+    setError,
+    setValue,
     formState: { errors },
     reset,
   } = useForm<RegistrationFormData>({
     defaultValues: {
+      fullName: initialName,
+      email: initialEmail,
       category: "MEMBER",
       district: "Kapchorwa",
       website_hp: "",
     },
   });
+
+  useEffect(() => {
+    if (initialEmail) setValue("email", initialEmail);
+    if (initialName) setValue("fullName", initialName);
+  }, [initialEmail, initialName, setValue]);
 
   const onSubmit = async (data: RegistrationFormData) => {
     setIsSubmitting(true);
@@ -59,10 +73,14 @@ export default function RegisterPage() {
       const json = await res.json();
 
       if (!res.ok) {
-        setErrorMessage(
-          json.message ||
-            "A registration with this phone number or email may already exist. Please contact the church office if you believe this is an error."
-        );
+        const msg = json.message || "Registration conflict detected. Please review your details.";
+        setErrorMessage(msg);
+
+        if (msg.toLowerCase().includes("email")) {
+          setError("email", { message: msg });
+        } else if (msg.toLowerCase().includes("phone")) {
+          setError("phone", { message: msg });
+        }
         return;
       }
 
@@ -186,11 +204,19 @@ export default function RegisterPage() {
 
                 <div>
                   <Input
-                    label="Email Address (Optional)"
+                    label="Email Address"
+                    required
                     type="email"
-                    placeholder="e.g. joshua@example.com"
-                    {...register("email")}
+                    placeholder="e.g. joshua@gmail.com"
+                    {...register("email", {
+                      required: "Email address is compulsory",
+                      pattern: {
+                        value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/,
+                        message: "Please enter a valid email address (e.g. name@gmail.com)",
+                      },
+                    })}
                     error={errors.email?.message}
+                    helperText="Required for check-in and membership records"
                   />
                 </div>
 
@@ -310,5 +336,20 @@ export default function RegisterPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function RegisterPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+          <div className="h-8 w-8 animate-spin rounded-full border-3 border-highland-700 border-t-transparent mx-auto"></div>
+          <p className="text-xs text-neutral-500 mt-2">Loading registration form...</p>
+        </div>
+      }
+    >
+      <RegisterFormContent />
+    </Suspense>
   );
 }

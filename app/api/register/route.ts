@@ -3,6 +3,7 @@ import { PublicRegistrationSchema } from "@/validators/registration";
 import { PeopleService } from "@/services/people.service";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
+import { validateEmailAddress } from "@/lib/email-validator";
 
 export async function POST(req: NextRequest) {
   try {
@@ -39,11 +40,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: "Registration received" });
     }
 
+    // Deep email validation (including Google account format & MX verification)
+    const emailCheck = await validateEmailAddress(validated.data.email);
+    if (!emailCheck.isValid) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: emailCheck.error || "Please enter a valid email address.",
+          errors: { email: [emailCheck.error || "Invalid email address"] },
+        },
+        { status: 400 }
+      );
+    }
+
     try {
       const person = await PeopleService.create({
         fullName: validated.data.fullName,
         phone: validated.data.phone,
-        email: validated.data.email || null,
+        email: emailCheck.normalizedEmail,
         gender: validated.data.gender || null,
         dateOfBirth: validated.data.dateOfBirth || null,
         village: validated.data.village || null,

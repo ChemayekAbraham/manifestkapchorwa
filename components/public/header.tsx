@@ -13,7 +13,7 @@ const NAV_LINKS = [
   { name: "Services", href: "/services" },
   { name: "Devotions", href: "/devotions" },
   { name: "Events", href: "/events" },
-  { name: "Prayer", href: "/prayer" },
+  { name: "Salvation", href: "/salvation" },
   { name: "Testimonies", href: "/testimony" },
   { name: "Giving", href: "/give" },
   { name: "Contact", href: "/contact" },
@@ -60,14 +60,14 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
           {NAV_LINKS.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                className={`px-2 xl:px-2.5 py-1.5 rounded-md text-xs xl:text-sm font-medium whitespace-nowrap transition-colors ${
                   isActive
                     ? "bg-highland-50 text-highland-900 font-semibold"
                     : "text-neutral-600 hover:text-highland-900 hover:bg-neutral-50"

@@ -138,21 +138,21 @@ export default async function HomePage() {
             </CardContent>
           </Card>
 
-          {/* Action 2: Prayer Requests */}
+          {/* Action 2: Salvation & New Converts */}
           <Card className="border-t-4 border-t-highland-600 hover:shadow-lg transition-all bg-white">
             <CardHeader className="pb-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-highland-100 text-highland-700 mb-2">
-                <Send className="h-5 w-5" />
+                <Sparkles className="h-5 w-5" />
               </div>
-              <CardTitle className="text-lg">Need Prayer?</CardTitle>
+              <CardTitle className="text-lg">Salvation / New Converts</CardTitle>
               <CardDescription>
-                Share your prayer burden with our pastoral and intercessory prayer warriors.
+                Received Jesus or won a soul to Christ? Register for discipleship and spiritual growth.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Link href="/prayer">
+              <Link href="/salvation">
                 <Button size="sm" variant="outline" className="w-full text-highland-700 border-highland-300 hover:bg-highland-50 justify-between">
-                  <span>Send Prayer Request</span>
+                  <span>Register Decision</span>
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -235,6 +235,22 @@ export default async function HomePage() {
                   <h4 className="font-heading font-bold text-neutral-900">Mid-Week Prayer & Word Encounter</h4>
                   <p className="text-xs text-neutral-500">5:00 PM – 7:00 PM | Prayer Hall</p>
                 </div>
+              </div>
+
+              {/* Phaneroo Sister Ministry Times */}
+              <div className="rounded-2xl bg-neutral-900 p-4 shadow-sm border border-neutral-800 flex items-center justify-between gap-4 text-white">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Phaneroo Global</span>
+                    <span className="text-[10px] text-neutral-400">Phaneroo Grounds • E.A.T</span>
+                  </div>
+                  <h4 className="font-heading text-sm font-bold text-white">Thurs 5PM • Sun 9AM & 11AM</h4>
+                </div>
+                <Link href="/services">
+                  <Button size="sm" variant="clay" className="text-xs font-bold shrink-0">
+                    Full Schedule
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

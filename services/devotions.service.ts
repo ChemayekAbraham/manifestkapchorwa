@@ -36,6 +36,7 @@ export class DevotionsService {
         slug,
         excerpt: data.excerpt?.trim() || data.content.slice(0, 160).trim() + "...",
         content: data.content.trim(),
+        imageUrl: data.imageUrl?.trim() || null,
         author: data.author?.trim() || "Pastor / Ministry Team",
         published: data.published ?? false,
         publishedAt: data.published ? (data.publishedAt ? new Date(data.publishedAt) : new Date()) : null,
@@ -70,6 +71,7 @@ export class DevotionsService {
         slug,
         ...(data.excerpt !== undefined ? { excerpt: data.excerpt?.trim() || null } : {}),
         ...(data.content ? { content: data.content.trim() } : {}),
+        ...(data.imageUrl !== undefined ? { imageUrl: data.imageUrl?.trim() || null } : {}),
         ...(data.author ? { author: data.author.trim() } : {}),
         ...(data.published !== undefined ? { published: data.published } : {}),
         publishedAt,
@@ -117,11 +119,11 @@ export class DevotionsService {
   static async listAdmin(search?: string, page = 1, pageSize = 20) {
     const where = search
       ? {
-          OR: [
-            { title: { contains: search.trim(), mode: "insensitive" as const } },
-            { author: { contains: search.trim(), mode: "insensitive" as const } },
-          ],
-        }
+        OR: [
+          { title: { contains: search.trim(), mode: "insensitive" as const } },
+          { author: { contains: search.trim(), mode: "insensitive" as const } },
+        ],
+      }
       : {};
 
     const [total, items] = await Promise.all([

@@ -9,7 +9,7 @@ import {
   Users,
   Calendar,
   BookOpen,
-  Send,
+  Sparkles,
   MessageSquare,
   FileBarChart2,
   Shield,
@@ -32,9 +32,9 @@ export function AdminSidebar({ userRole, isOpen, onClose }: AdminSidebarProps) {
   const navigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "People / Members", href: "/admin/people", icon: Users },
+    { name: "Salvation & Converts", href: "/admin/salvation", icon: Sparkles },
     { name: "Events & Attendance", href: "/admin/events", icon: Calendar },
     { name: "Devotionals", href: "/admin/devotions", icon: BookOpen },
-    { name: "Prayer Requests", href: "/admin/prayer-requests", icon: Send },
     { name: "Testimonies", href: "/admin/testimonies", icon: MessageSquare },
     { name: "Reports & Exports", href: "/admin/reports", icon: FileBarChart2 },
     ...(canManageUsers(userRole)

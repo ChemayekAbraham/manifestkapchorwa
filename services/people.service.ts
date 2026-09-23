@@ -5,36 +5,49 @@ import { Prisma } from "@prisma/client";
 
 export class PeopleService {
   /**
-   * Check for duplicate person by phone or email
+   * Check for duplicate person by email or phone with clear individual reasons
    */
   static async findDuplicate(phone?: string | null, email?: string | null, excludeId?: string) {
     const normalizedPhone = normalizeUgandanPhone(phone);
     const normalizedEmail = email?.trim().toLowerCase() || null;
 
-    if (!normalizedPhone && !normalizedEmail) {
-      return null;
+    if (normalizedEmail) {
+      const emailDuplicate = await prisma.person.findFirst({
+        where: {
+          email: { equals: normalizedEmail, mode: "insensitive" },
+          ...(excludeId ? { id: { not: excludeId } } : {}),
+        },
+      });
+      if (emailDuplicate) {
+        return {
+          type: "EMAIL" as const,
+          field: "email",
+          value: normalizedEmail,
+          person: emailDuplicate,
+          message: `The email address "${normalizedEmail}" already exists in our church records. Please enter a different email address.`,
+        };
+      }
     }
-
-    const orConditions: Prisma.PersonWhereInput[] = [];
 
     if (normalizedPhone) {
-      orConditions.push({ phone: normalizedPhone });
-    }
-    if (normalizedEmail) {
-      orConditions.push({ email: normalizedEmail });
+      const phoneDuplicate = await prisma.person.findFirst({
+        where: {
+          phone: normalizedPhone,
+          ...(excludeId ? { id: { not: excludeId } } : {}),
+        },
+      });
+      if (phoneDuplicate) {
+        return {
+          type: "PHONE" as const,
+          field: "phone",
+          value: normalizedPhone,
+          person: phoneDuplicate,
+          message: `The phone number "${normalizedPhone}" already exists in our church records. Please enter a different phone number.`,
+        };
+      }
     }
 
-    const where: Prisma.PersonWhereInput = {
-      OR: orConditions,
-    };
-
-    if (excludeId) {
-      where.id = { not: excludeId };
-    }
-
-    return prisma.person.findFirst({
-      where,
-    });
+    return null;
   }
 
   /**
@@ -47,9 +60,7 @@ export class PeopleService {
     if (normalizedPhone || normalizedEmail) {
       const duplicate = await this.findDuplicate(normalizedPhone, normalizedEmail);
       if (duplicate) {
-        throw new Error(
-          "A registration with this phone number or email already exists. Please contact the church office if you believe this is an error."
-        );
+        throw new Error(duplicate.message);
       }
     }
 
@@ -88,7 +99,7 @@ export class PeopleService {
     if (normalizedPhone || normalizedEmail) {
       const duplicate = await this.findDuplicate(normalizedPhone, normalizedEmail, id);
       if (duplicate) {
-        throw new Error("Another member with this phone number or email already exists.");
+        throw new Error(duplicate.message);
       }
     }
 

@@ -4,7 +4,7 @@ import { GenderEnum, MemberCategoryEnum } from "./person";
 export const PublicRegistrationSchema = z.object({
   fullName: z.string().min(2, "Full name is required (minimum 2 characters)").max(100),
   phone: z.string().min(8, "Valid phone number is required").max(20),
-  email: z.string().email("Invalid email address").max(100).optional().nullable().or(z.literal("")),
+  email: z.string().min(1, "Email address is compulsory").email("Please enter a valid email address (e.g. name@gmail.com)").max(100),
   gender: GenderEnum.optional().nullable(),
   dateOfBirth: z.string().optional().nullable(),
   village: z.string().max(100).optional().nullable(),

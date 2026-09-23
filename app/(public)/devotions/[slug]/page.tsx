@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { DevotionsService } from "@/services/devotions.service";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, User, Calendar, BookOpen, Share2 } from "lucide-react";
+import { ArrowLeft, User, Calendar } from "lucide-react";
+import { DevotionContentRenderer } from "@/components/public/devotion-content-renderer";
 import { formatDate } from "@/lib/utils";
 
 export const revalidate = 60;
@@ -58,33 +59,19 @@ export default async function DevotionDetailPage(props: { params: Promise<{ slug
           </div>
         </header>
 
-        {/* Devotional Content formatted as clean readable text */}
-        <div className="prose prose-neutral max-w-none text-neutral-800 leading-relaxed space-y-4 text-base font-serif">
-          {devotion.content.split("\n\n").map((para, i) => {
-            if (para.startsWith("### ")) {
-              return (
-                <h3 key={i} className="font-heading text-xl font-bold text-neutral-900 pt-3">
-                  {para.replace("### ", "")}
-                </h3>
-              );
-            }
-            if (para.startsWith("> ")) {
-              return (
-                <blockquote key={i} className="border-l-4 border-clay-500 pl-4 py-1 italic bg-cream-50 text-neutral-700 rounded-r-lg my-3">
-                  {para.replace("> ", "")}
-                </blockquote>
-              );
-            }
-            if (para.startsWith("**") && para.endsWith("**")) {
-              return (
-                <p key={i} className="font-bold text-neutral-900">
-                  {para.replace(/\*\*/g, "")}
-                </p>
-              );
-            }
-            return <p key={i} className="leading-relaxed whitespace-pre-wrap">{para}</p>;
-          })}
-        </div>
+        {/* Featured Devotional Graphic / Image */}
+        {devotion.imageUrl && (
+          <div className="relative rounded-2xl overflow-hidden aspect-video sm:aspect-[2/1] w-full bg-neutral-950 shadow-md">
+            <img
+              src={devotion.imageUrl}
+              alt={devotion.title}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+
+        {/* Clean, Structured Devotional Reader */}
+        <DevotionContentRenderer content={devotion.content} />
 
         {/* Footer & Share CTA */}
         <div className="pt-8 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-4">

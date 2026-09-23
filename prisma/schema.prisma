@@ -130,6 +130,7 @@ model Devotion {
   slug        String    @unique
   excerpt     String?
   content     String
+  imageUrl    String?
   author      String    @default("Pastor / Ministry Team")
   published   Boolean   @default(false)
   publishedAt DateTime?

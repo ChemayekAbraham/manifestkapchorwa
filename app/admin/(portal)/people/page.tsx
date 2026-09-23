@@ -52,6 +52,7 @@ export default function PeopleManagementPage() {
 
   // Modals state
   const [memberModalOpen, setMemberModalOpen] = useState(false);
+  const [memberModalMode, setMemberModalMode] = useState<"view" | "edit">("view");
   const [selectedPerson, setSelectedPerson] = useState<any | null>(null);
   const [importModalOpen, setImportModalOpen] = useState(false);
 
@@ -98,10 +99,10 @@ export default function PeopleManagementPage() {
     fetchPeople(1);
   };
 
-  const handleExportCSV = async () => {
+  const handleExportPDF = async () => {
     const params: any = {
       type: "custom",
-      format: "csv",
+      format: "pdf",
       category: category || undefined,
       status: status || undefined,
       gender: gender || undefined,
@@ -120,7 +121,7 @@ export default function PeopleManagementPage() {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `manifest-kapchorwa-members-${new Date().toISOString().split("T")[0]}.csv`;
+      a.download = `manifest-kapchorwa-members-${new Date().toISOString().split("T")[0]}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -156,7 +157,7 @@ export default function PeopleManagementPage() {
             People & Congregation Management
           </h1>
           <p className="text-xs text-neutral-500 mt-1">
-            Total {total} people recorded • Search, filter, edit, or import members.
+            Total {total} people recorded • Click any member to view details or edit.
           </p>
         </div>
 
@@ -166,6 +167,7 @@ export default function PeopleManagementPage() {
             variant="clay"
             onClick={() => {
               setSelectedPerson(null);
+              setMemberModalMode("edit");
               setMemberModalOpen(true);
             }}
             className="gap-1.5 shadow-sm text-xs"
@@ -187,11 +189,11 @@ export default function PeopleManagementPage() {
           <Button
             size="sm"
             variant="secondary"
-            onClick={handleExportCSV}
+            onClick={handleExportPDF}
             className="gap-1.5 text-xs"
           >
             <Download className="h-4 w-4" />
-            <span>Export CSV</span>
+            <span>Export PDF</span>
           </Button>
         </div>
       </div>
@@ -309,6 +311,7 @@ export default function PeopleManagementPage() {
               variant="default"
               onClick={() => {
                 setSelectedPerson(null);
+                setMemberModalMode("edit");
                 setMemberModalOpen(true);
               }}
             >
@@ -332,9 +335,21 @@ export default function PeopleManagementPage() {
             </TableHeader>
             <TableBody>
               {people.map((person) => (
-                <TableRow key={person.id} className={person.status === "INACTIVE" ? "opacity-60 bg-neutral-50/50" : ""}>
+                <TableRow
+                  key={person.id}
+                  onClick={() => {
+                    setSelectedPerson(person);
+                    setMemberModalMode("view");
+                    setMemberModalOpen(true);
+                  }}
+                  className={`cursor-pointer transition-colors hover:bg-highland-50/40 ${
+                    person.status === "INACTIVE" ? "opacity-60 bg-neutral-50/50" : ""
+                  }`}
+                >
                   <TableCell>
-                    <span className="font-bold text-xs text-neutral-900 block">{person.fullName}</span>
+                    <span className="font-bold text-xs text-neutral-900 block hover:text-highland-700">
+                      {person.fullName}
+                    </span>
                     {person.gender && <span className="text-[10px] text-neutral-500">{person.gender}</span>}
                   </TableCell>
                   <TableCell className="text-xs">
@@ -371,8 +386,10 @@ export default function PeopleManagementPage() {
                         size="icon"
                         variant="ghost"
                         className="h-8 w-8 text-neutral-600 hover:text-neutral-900"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setSelectedPerson(person);
+                          setMemberModalMode("edit");
                           setMemberModalOpen(true);
                         }}
                         title="Edit Member"
@@ -386,7 +403,8 @@ export default function PeopleManagementPage() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8 text-amber-600 hover:bg-amber-50"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setPersonToDelete(person);
                             setIsPermanentDelete(false);
                             setDeleteConfirmOpen(true);
@@ -403,7 +421,8 @@ export default function PeopleManagementPage() {
                           size="icon"
                           variant="ghost"
                           className="h-8 w-8 text-red-600 hover:bg-red-50"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             setPersonToDelete(person);
                             setIsPermanentDelete(true);
                             setDeleteConfirmOpen(true);
@@ -456,6 +475,7 @@ export default function PeopleManagementPage() {
         open={memberModalOpen}
         onOpenChange={setMemberModalOpen}
         person={selectedPerson}
+        initialMode={memberModalMode}
         onSuccess={() => fetchPeople(page)}
       />
 
@@ -482,3 +502,4 @@ export default function PeopleManagementPage() {
     </div>
   );
 }
+
