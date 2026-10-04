@@ -62,29 +62,93 @@ export default async function AboutPage() {
       {/* Statement of Faith */}
       <div className="rounded-3xl bg-cream-100 border border-cream-200 p-6 sm:p-10 space-y-6">
         <div className="space-y-2">
-          <Badge variant="ochre">Our Foundation</Badge>
-          <h2 className="font-heading text-2xl font-bold text-neutral-900">{faith.title}</h2>
+          <Badge variant="ochre">Our Foundation • phaneroo.org</Badge>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900">{faith.title}</h2>
+          <p className="text-xs sm:text-sm text-neutral-600">
+            As articulated by Phaneroo Ministries International (Apostle Grace Lubega):
+          </p>
         </div>
-        <p className="text-sm text-neutral-700 leading-relaxed font-serif text-base sm:text-lg italic bg-white/70 p-6 rounded-2xl border border-neutral-200/60">
-          "{faith.content}"
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-neutral-700 font-medium">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-highland-700 shrink-0" />
-            <span>Infallible Authority of Scripture</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-highland-700 shrink-0" />
-            <span>Salvation by Grace through Faith</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-highland-700 shrink-0" />
-            <span>Power & Ministry of the Holy Spirit</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <CheckCircle2 className="h-4 w-4 text-highland-700 shrink-0" />
-            <span>Discipleship & Community Impact</span>
-          </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              id: 1,
+              title: "God The Father",
+              text: "We believe in God the creator of heaven and earth, the Supreme Being and Father of us all.",
+            },
+            {
+              id: 2,
+              title: "Jesus Christ",
+              text: "We believe Jesus Christ is His son who was God manifest in the flesh; He walked the earth, lived among men; died and was raised again to life.",
+            },
+            {
+              id: 3,
+              title: "Creation & The Fall",
+              text: "We believe that man is a created being, made in the likeness and image of God, but through Adam’s transgression and fall, sin came into the world.",
+            },
+            {
+              id: 4,
+              title: "Salvation & Healing",
+              text: "We believe that the redemptive work of Christ on the cross provides salvation for the soul of everyone that believes and divine healing for the body.",
+            },
+            {
+              id: 5,
+              title: "Freedom in Christ",
+              text: "We believe in the freedom of the Christian from sin, and the consequent blessing of being bond servants of Christ; exhibiting our fruit unto holiness and life everlasting (Romans 6:22).",
+            },
+            {
+              id: 6,
+              title: "Justification by Faith",
+              text: "We believe that we are justified by faith, and have received of the free gift of righteousness through God’s Grace, which gift is not of works (Galatians 2:16, Romans 4:16).",
+            },
+            {
+              id: 7,
+              title: "God's Purpose in Men",
+              text: "We believe that God wills and works in men and that His purposes are fulfilled by His work through us who believe.",
+            },
+            {
+              id: 8,
+              title: "Authority of The Word",
+              text: "We believe that the Word of God is the sole standard of truth and is the pattern for Christian living.",
+            },
+            {
+              id: 9,
+              title: "The Holy Spirit",
+              text: "We believe that when an individual receives the Holy Spirit, he/she receives divine enablement for Christian service and witness.",
+            },
+            {
+              id: 10,
+              title: "The Blessed Hope",
+              text: "We believe that Jesus will return and '. . . The dead in Christ shall rise first: Then we which are alive and remain shall be caught up together with them in the clouds to meet the Lord in the air . . .' (1 Thess. 4:16–17).",
+            },
+          ].map((item) => (
+            <div
+              key={item.id}
+              className="bg-white/90 rounded-2xl p-4 border border-neutral-200/80 shadow-sm space-y-1.5"
+            >
+              <div className="flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-highland-800 text-white font-bold text-xs">
+                  {item.id}
+                </span>
+                <span className="font-heading font-bold text-sm text-neutral-900">{item.title}</span>
+              </div>
+              <p className="text-xs text-neutral-600 leading-relaxed pl-8">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="pt-2 flex items-center justify-between flex-wrap gap-4 border-t border-cream-300">
+          <span className="text-xs text-neutral-500">Official statement from Phaneroo Ministries International</span>
+          <a
+            href="https://phaneroo.org/our-statement-of-faith/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-bold text-highland-700 hover:text-highland-900 underline"
+          >
+            Read on phaneroo.org ↗
+          </a>
         </div>
       </div>
 

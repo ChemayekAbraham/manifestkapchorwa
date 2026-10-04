@@ -23,10 +23,10 @@ export default async function ServicesPage() {
     schedules = JSON.parse(serviceContent.content);
   } catch {
     schedules = [
-      { name: "Sunday First Service", day: "Sunday", time: "8:00 AM - 10:30 AM", location: "Main Sanctuary" },
-      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM", location: "Main Sanctuary" },
-      { name: "Mid-Week Deliverance & Prayer", day: "Wednesday", time: "5:00 PM - 7:00 PM", location: "Prayer Hall" },
-      { name: "Youth Fellowship", day: "Friday", time: "5:30 PM - 7:30 PM", location: "Youth Chapel" },
+      { name: "Sunday First Service", day: "Sunday", time: "9:00 AM - 10:45 AM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
+      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
+      { name: "Thursday Fellowship Service", day: "Thursday", time: "5:00 PM - 7:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
+      { name: "Highlands Overnight Prayer Summit", day: "Monthly", time: "9:00 PM - 5:00 AM", location: "Main Sanctuary" },
     ];
   }
 
@@ -62,7 +62,7 @@ export default async function ServicesPage() {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-2 text-xs text-neutral-600">
                 <MapPin className="h-4 w-4 text-highland-700 shrink-0" />
-                <span>Location: {srv.location} (Plot 14, Main Street)</span>
+                <span>Location: {srv.location} (Joshua Cheptegei Foundation Office, Kapchorwa Town)</span>
               </div>
             </CardContent>
           </Card>

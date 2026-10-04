@@ -13,6 +13,8 @@ import {
   ShieldCheck,
   CheckCircle2,
   Sparkles,
+  ShoppingBag,
+  Camera,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -99,16 +101,16 @@ export default async function HomePage() {
           {/* Quick Highlands Metric Strip */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6 pt-10 border-t border-white/15 max-w-3xl mx-auto text-left">
             <div className="bg-black/40 rounded-xl p-3.5 border border-white/15 backdrop-blur-md shadow-sm">
-              <span className="text-xs text-highland-300 block font-semibold">Sunday Main</span>
-              <span className="font-heading font-bold text-sm sm:text-base text-white">11:00 AM — 1:30 PM</span>
+              <span className="text-xs text-highland-300 block font-semibold">Sunday Services</span>
+              <span className="font-heading font-bold text-sm sm:text-base text-white">9:00 AM & 11:00 AM</span>
             </div>
             <div className="bg-black/40 rounded-xl p-3.5 border border-white/15 backdrop-blur-md shadow-sm">
-              <span className="text-xs text-highland-300 block font-semibold">Mid-Week Prayer</span>
-              <span className="font-heading font-bold text-sm sm:text-base text-white">Wed 5:00 PM</span>
+              <span className="text-xs text-highland-300 block font-semibold">Thursday Service</span>
+              <span className="font-heading font-bold text-sm sm:text-base text-white">Thurs 5:00 PM</span>
             </div>
             <div className="col-span-2 sm:col-span-1 bg-black/40 rounded-xl p-3.5 border border-white/15 backdrop-blur-md shadow-sm">
               <span className="text-xs text-highland-300 block font-semibold">Location</span>
-              <span className="font-heading font-bold text-sm sm:text-base text-white">Plot 14, Main Street</span>
+              <span className="font-heading font-bold text-sm sm:text-base text-white">Cheptegei Foundation, Kapchorwa</span>
             </div>
           </div>
         </div>
@@ -212,8 +214,8 @@ export default async function HomePage() {
                   SUN
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-heading font-bold text-neutral-900">Sunday Celebration Service</h4>
-                  <p className="text-xs text-neutral-500">8:00 AM – 10:30 AM | Main Sanctuary</p>
+                  <h4 className="font-heading font-bold text-neutral-900">Sunday First Service</h4>
+                  <p className="text-xs text-neutral-500">9:00 AM – 10:45 AM E.A.T | Phaneroo Grounds</p>
                 </div>
               </div>
 
@@ -222,18 +224,18 @@ export default async function HomePage() {
                   SUN
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-heading font-bold text-neutral-900">Sunday Main Service (Grace Service)</h4>
-                  <p className="text-xs text-neutral-500">11:00 AM – 1:30 PM | Main Sanctuary</p>
+                  <h4 className="font-heading font-bold text-neutral-900">Sunday Second Service</h4>
+                  <p className="text-xs text-neutral-500">11:00 AM – 1:30 PM E.A.T | Phaneroo Grounds</p>
                 </div>
               </div>
 
               <div className="rounded-2xl bg-white p-4 shadow-sm border border-neutral-200/80 flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-clay-100 text-clay-700 font-bold text-lg">
-                  WED
+                  THU
                 </div>
                 <div className="space-y-1">
-                  <h4 className="font-heading font-bold text-neutral-900">Mid-Week Prayer & Word Encounter</h4>
-                  <p className="text-xs text-neutral-500">5:00 PM – 7:00 PM | Prayer Hall</p>
+                  <h4 className="font-heading font-bold text-neutral-900">Thursday Fellowship Service</h4>
+                  <p className="text-xs text-neutral-500">5:00 PM – 7:30 PM E.A.T | Phaneroo Grounds</p>
                 </div>
               </div>
 
@@ -382,7 +384,64 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 7. BOTTOM BANNER CTA */}
+      {/* 7. MERCHANDISE & GALLERY SHOWCASE */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Card 1: Official Merchandise */}
+          <div className="rounded-3xl bg-neutral-900 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-neutral-800 shadow-xl relative overflow-hidden group">
+            <div className="space-y-3 relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold">
+                <ShoppingBag className="h-3.5 w-3.5" />
+                <span>distribution.phaneroo.org</span>
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Official Ministry Merchandise
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                Discover official Phaneroo T-shirts, embroidered caps, fleece hoodies, and lifestyle bags. Order with convenient pickup in Kapchorwa Town or delivery across Uganda.
+              </p>
+            </div>
+
+            <div className="pt-2 flex items-center justify-between relative z-10">
+              <span className="text-xs font-semibold text-amber-400">From UGX 15,000</span>
+              <Link href="/merchandise">
+                <Button size="sm" className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold gap-1 text-xs">
+                  <span>Explore Store</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: Photo Gallery */}
+          <div className="rounded-3xl bg-highland-900 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-highland-800 shadow-xl relative overflow-hidden group">
+            <div className="space-y-3 relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold">
+                <Camera className="h-3.5 w-3.5 text-amber-300" />
+                <span>Make Manifest Moments</span>
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-white">
+                Worship & Ministry Gallery
+              </h3>
+              <p className="text-xs sm:text-sm text-highland-100 leading-relaxed">
+                Experience high-definition captures of life-transforming services, apostolic teachings by Apostle Grace Lubega, and joyful celebrations in God's presence.
+              </p>
+            </div>
+
+            <div className="pt-2 flex items-center justify-between relative z-10">
+              <span className="text-xs font-semibold text-highland-200">High-Definition Photo Archive</span>
+              <Link href="/gallery">
+                <Button size="sm" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold gap-1 text-xs">
+                  <span>View Gallery</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. BOTTOM BANNER CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="rounded-3xl bg-gradient-to-b from-white via-highland-50/30 to-neutral-50/80 border-2 border-highland-100 p-8 sm:p-12 space-y-4 shadow-xl">
           <Badge variant="clay">Get Connected</Badge>

@@ -81,7 +81,7 @@ describe("Validation Schemas", () => {
     const valid = ServiceCheckInSchema.safeParse({
       fullName: "Joshua Chemutai",
       email: "joshua@example.com",
-      serviceName: "Sunday First Service (8:00 AM – 10:30 AM)",
+      serviceName: "Sunday First Service (9:00 AM – 10:45 AM E.A.T)",
     });
     expect(valid.success).toBe(true);
 

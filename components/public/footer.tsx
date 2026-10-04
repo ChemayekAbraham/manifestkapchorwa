@@ -69,7 +69,17 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/salvation" className="text-ochre-300 hover:text-white transition-colors font-medium">
+                <Link href="/gallery" className="hover:text-white transition-colors">
+                  Photo Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/merchandise" className="text-ochre-300 hover:text-white transition-colors font-medium">
+                  Ministry Merchandise Store
+                </Link>
+              </li>
+              <li>
+                <Link href="/salvation" className="hover:text-white transition-colors">
                   New Converts Registration (Salvation)
                 </Link>
               </li>
@@ -104,15 +114,15 @@ export function Footer() {
             <div className="space-y-2.5 text-xs text-neutral-300">
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
                 <span className="font-semibold text-ochre-400 block">Sunday 1st Service</span>
-                <span className="text-neutral-300">8:00 AM – 10:30 AM (Celebration)</span>
+                <span className="text-neutral-300">9:00 AM – 10:45 AM E.A.T</span>
               </div>
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
                 <span className="font-semibold text-ochre-400 block">Sunday 2nd Service</span>
-                <span className="text-neutral-300">11:00 AM – 1:30 PM (Main Service)</span>
+                <span className="text-neutral-300">11:00 AM – 1:30 PM E.A.T</span>
               </div>
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
-                <span className="font-semibold text-ochre-400 block">Wednesday Prayer & Deliverance</span>
-                <span className="text-neutral-300">5:00 PM – 7:00 PM</span>
+                <span className="font-semibold text-ochre-400 block">Thursday Fellowship Service</span>
+                <span className="text-neutral-300">5:00 PM – 7:30 PM E.A.T</span>
               </div>
             </div>
           </div>
@@ -125,7 +135,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-xs text-neutral-300">
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-clay-400 shrink-0 mt-0.5" />
-                <span>Plot 14, Main Street, Kapchorwa Municipality, Eastern Uganda</span>
+                <span>Joshua Cheptegei Foundation Office, Kapchorwa Town, Uganda</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-clay-400 shrink-0" />

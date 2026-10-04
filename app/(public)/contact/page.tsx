@@ -21,7 +21,7 @@ export default async function ContactPage() {
     contactData = JSON.parse(contactContent.content);
   } catch {
     contactData = {
-      address: "Plot 14, Main Street, Kapchorwa Municipality, Eastern Uganda",
+      address: "Joshua Cheptegei Foundation Office, Kapchorwa Town, Uganda",
       phone: "+256 770 123456 / +256 750 123456",
       email: "info@manifestkapchorwa.org",
       officeHours: "Tuesday – Saturday: 8:30 AM – 5:00 PM (EAT)",
