@@ -1,3 +1,4 @@
+import { Devotion } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/utils";
 import { DevotionInput } from "@/validators/devotion";
@@ -83,37 +84,51 @@ export class DevotionsService {
     return prisma.devotion.delete({ where: { id } });
   }
 
-  static async getBySlug(slug: string, requirePublished = true) {
-    return prisma.devotion.findFirst({
-      where: {
-        slug,
-        ...(requirePublished ? { published: true } : {}),
-      },
-    });
+  static async getBySlug(slug: string, requirePublished = true): Promise<Devotion | null> {
+    try {
+      return await prisma.devotion.findFirst({
+        where: {
+          slug,
+          ...(requirePublished ? { published: true } : {}),
+        },
+      });
+    } catch {
+      return null;
+    }
   }
 
   static async getById(id: string) {
     return prisma.devotion.findUnique({ where: { id } });
   }
 
-  static async listPublic(page = 1, pageSize = 10) {
-    const [total, items] = await Promise.all([
-      prisma.devotion.count({ where: { published: true } }),
-      prisma.devotion.findMany({
-        where: { published: true },
-        skip: (page - 1) * pageSize,
-        take: pageSize,
-        orderBy: { publishedAt: "desc" },
-      }),
-    ]);
+  static async listPublic(page = 1, pageSize = 10): Promise<{ items: Devotion[]; total: number; page: number; pageSize: number; totalPages: number }> {
+    try {
+      const [total, items] = await Promise.all([
+        prisma.devotion.count({ where: { published: true } }),
+        prisma.devotion.findMany({
+          where: { published: true },
+          skip: (page - 1) * pageSize,
+          take: pageSize,
+          orderBy: { publishedAt: "desc" },
+        }),
+      ]);
 
-    return {
-      items,
-      total,
-      page,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
-    };
+      return {
+        items,
+        total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
+      };
+    } catch {
+      return {
+        items: [],
+        total: 0,
+        page,
+        pageSize,
+        totalPages: 0,
+      };
+    }
   }
 
   static async listAdmin(search?: string, page = 1, pageSize = 20) {

@@ -1,3 +1,4 @@
+import { Event } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { AttendanceMarkInput, EventInput } from "@/validators/event";
 
@@ -74,20 +75,24 @@ export class EventsService {
     };
   }
 
-  static async listUpcoming(limit = 10, onlyPublished = true) {
-    return prisma.event.findMany({
-      where: {
-        date: { gte: new Date(new Date().setHours(0, 0, 0, 0)) },
-        ...(onlyPublished ? { published: true } : {}),
-      },
-      orderBy: { date: "asc" },
-      take: limit,
-      include: {
-        _count: {
-          select: { attendance: true },
+  static async listUpcoming(limit = 10, onlyPublished = true): Promise<(Event & { _count: { attendance: number } })[]> {
+    try {
+      return await prisma.event.findMany({
+        where: {
+          date: { gte: new Date(new Date().setHours(0, 0, 0, 0)) },
+          ...(onlyPublished ? { published: true } : {}),
         },
-      },
-    });
+        orderBy: { date: "asc" },
+        take: limit,
+        include: {
+          _count: {
+            select: { attendance: true },
+          },
+        },
+      });
+    } catch {
+      return [];
+    }
   }
 
   static async listAll(page = 1, pageSize = 20) {

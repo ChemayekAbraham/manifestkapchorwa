@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { ContentService } from "@/services/content.service";
 import { EventsService } from "@/services/events.service";
 import { DevotionsService } from "@/services/devotions.service";
+import { Testimony } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 
@@ -30,13 +31,15 @@ export const revalidate = 60; // Revalidate every minute
 export default async function HomePage() {
   const [heroContent, upcomingEvents, latestDevotions, testimonies] = await Promise.all([
     ContentService.getContent("HOME_HERO"),
-    EventsService.listUpcoming(3, true).catch(() => []),
-    DevotionsService.listPublic(1, 3).then((res) => res.items).catch(() => []),
-    prisma.testimony.findMany({
-      where: { status: "APPROVED" },
-      take: 2,
-      orderBy: { approvedAt: "desc" },
-    }).catch(() => []),
+    EventsService.listUpcoming(3, true),
+    DevotionsService.listPublic(1, 3).then((res) => res.items),
+    prisma.testimony
+      .findMany({
+        where: { status: "APPROVED" },
+        take: 2,
+        orderBy: { approvedAt: "desc" },
+      })
+      .catch((): Testimony[] => []),
   ]);
 
   return (

@@ -23,7 +23,7 @@ export default async function DevotionsPage() {
     // Non-blocking fallback
   }
 
-  const result = await DevotionsService.listPublic(1, 20).catch(() => ({ items: [], total: 0 }));
+  const result = await DevotionsService.listPublic(1, 20);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">

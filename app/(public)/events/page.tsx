@@ -15,7 +15,7 @@ export const metadata = {
 export const revalidate = 60;
 
 export default async function EventsPage() {
-  const events = await EventsService.listUpcoming(20, true).catch(() => []);
+  const events = await EventsService.listUpcoming(20, true);
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">

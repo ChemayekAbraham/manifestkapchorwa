@@ -66,17 +66,21 @@ export const DEFAULT_WEBSITE_SECTIONS = [
 
 export class ContentService {
   static async getContent(key: string): Promise<{ key: string; title: string; content: string; imageUrl?: string | null }> {
-    const item = await prisma.websiteContent.findUnique({
-      where: { key },
-    });
+    try {
+      const item = await prisma.websiteContent.findUnique({
+        where: { key },
+      });
 
-    if (item) {
-      return {
-        key: item.key,
-        title: item.title,
-        content: item.content,
-        imageUrl: item.imageUrl,
-      };
+      if (item) {
+        return {
+          key: item.key,
+          title: item.title,
+          content: item.content,
+          imageUrl: item.imageUrl,
+        };
+      }
+    } catch {
+      // Fall back smoothly to DEFAULT_WEBSITE_SECTIONS during prerendering or if DB is offline
     }
 
     const fallback = DEFAULT_WEBSITE_SECTIONS.find((s) => s.key === key);
@@ -89,20 +93,31 @@ export class ContentService {
   }
 
   static async getAllContent() {
-    const list = await prisma.websiteContent.findMany();
-    const map = new Map(list.map((c) => [c.key, c]));
+    try {
+      const list = await prisma.websiteContent.findMany();
+      const map = new Map(list.map((c) => [c.key, c]));
 
-    return DEFAULT_WEBSITE_SECTIONS.map((def) => {
-      const stored = map.get(def.key);
-      return {
+      return DEFAULT_WEBSITE_SECTIONS.map((def) => {
+        const stored = map.get(def.key);
+        return {
+          key: def.key,
+          title: stored?.title || def.title,
+          content: stored?.content || def.content,
+          imageUrl: stored?.imageUrl || null,
+          published: stored?.published ?? true,
+          updatedAt: stored?.updatedAt || new Date(),
+        };
+      });
+    } catch {
+      return DEFAULT_WEBSITE_SECTIONS.map((def) => ({
         key: def.key,
-        title: stored?.title || def.title,
-        content: stored?.content || def.content,
-        imageUrl: stored?.imageUrl || null,
-        published: stored?.published ?? true,
-        updatedAt: stored?.updatedAt || new Date(),
-      };
-    });
+        title: def.title,
+        content: def.content,
+        imageUrl: null,
+        published: true,
+        updatedAt: new Date(),
+      }));
+    }
   }
 
   static async updateContent(key: string, data: { title?: string; content?: string; imageUrl?: string | null }) {
