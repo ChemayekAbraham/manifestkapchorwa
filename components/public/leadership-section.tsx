@@ -35,6 +35,16 @@ export const TEAM_MEMBERS: TeamMember[] = [
     bio: "Overseeing ministry administration, service planning, operations logistics, communications, and member coordination for Manifest Kapchorwa.",
     location: "Kapchorwa Town, Uganda",
   },
+  {
+    id: "rhema-sarah",
+    name: "Rhema Sarah",
+    role: "Finance",
+    phone: "+256775097338",
+    phoneFormatted: "+256 775 097 338 (0775097338)",
+    imageUrl: "/images/team/rhema-sarah.jpg",
+    bio: "Overseeing ministry financial stewardship, tithes and partnership records, financial accountability, and resource budgeting for Manifest Kapchorwa.",
+    location: "Kapchorwa Town, Uganda",
+  },
 ];
 
 export function LeadershipSection() {
