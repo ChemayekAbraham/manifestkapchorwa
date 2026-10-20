@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   Clock,
@@ -369,22 +370,37 @@ export default async function HomePage() {
 
           {/* Card 2: Photo Gallery */}
           <MotionCard delay={0.2}>
-            <div className="h-full rounded-3xl bg-highland-900 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-highland-800 shadow-xl relative overflow-hidden group">
+            <div className="h-full rounded-3xl bg-highland-950 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-highland-800 shadow-xl relative overflow-hidden group">
+              {/* Photo backdrop */}
+              <div className="absolute inset-0 z-0 overflow-hidden">
+                <Image
+                  src="/images/gallery/kapchorwa-street-mission-team.jpg"
+                  alt="Kapchorwa Street Mission"
+                  fill
+                  className="object-cover opacity-25 group-hover:scale-105 group-hover:opacity-35 transition-all duration-700 ease-out"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-highland-950 via-highland-950/80 to-highland-900/40" />
+              </div>
+
               <div className="space-y-3 relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold">
                   <Camera className="h-3.5 w-3.5 text-amber-300" />
-                  <span>Make Manifest Moments</span>
+                  <span>Kapchorwa & Global Moments</span>
                 </div>
                 <h3 className="font-heading text-2xl font-bold text-white">
-                  Worship & Ministry Gallery
+                  Photo & Outreach Gallery
                 </h3>
-                <p className="text-xs sm:text-sm text-highland-100 leading-relaxed">
-                  Experience high-definition captures of life-transforming services, apostolic teachings by Apostle Grace Lubega, and joyful celebrations in God's presence.
+                <p className="text-xs sm:text-sm text-highland-100/90 leading-relaxed">
+                  Witness the move of God in the highlands — street evangelism, open-air preaching, civic outreach across Kapchorwa, and glorious Phaneroo gatherings.
                 </p>
               </div>
 
               <div className="pt-2 flex items-center justify-between relative z-10">
-                <span className="text-xs font-semibold text-highland-200">High-Definition Photo Archive</span>
+                <span className="text-xs font-semibold text-amber-300 flex items-center gap-1">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  New Outreach Photos
+                </span>
                 <Link href="/gallery">
                   <Button size="sm" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold gap-1 text-xs">
                     <span>View Gallery</span>

@@ -14,19 +14,71 @@ import {
   Sparkles,
   Share2,
   Check,
+  MapPin,
 } from "lucide-react";
 
 export interface GalleryImage {
   id: string;
   title: string;
-  category: "Worship & Celebration" | "Apostle Grace Lubega" | "Phaneroo Grounds" | "Fellowship";
+  category: "Kapchorwa Outreach" | "Worship & Celebration" | "Apostle Grace Lubega" | "Phaneroo Grounds" | "Fellowship";
   thumbnailUrl: string;
   fullUrl: string;
   description: string;
   date?: string;
+  location?: string;
 }
 
 const GALLERY_ITEMS: GalleryImage[] = [
+  {
+    id: "kapchorwa-street-mission-team",
+    title: "Street Mission Outreach Team — Kapchorwa Town",
+    category: "Kapchorwa Outreach",
+    thumbnailUrl: "/images/gallery/kapchorwa-street-mission-team.jpg",
+    fullUrl: "/images/gallery/kapchorwa-street-mission-team.jpg",
+    description: "Passionate brethren and ministers taking the Gospel to the streets and communities of Kapchorwa.",
+    date: "Street Outreach 2026",
+    location: "Kapchorwa Town",
+  },
+  {
+    id: "kapchorwa-evangelism-outreach",
+    title: "Taking the Word to the Marketplaces & Streets",
+    category: "Kapchorwa Outreach",
+    thumbnailUrl: "/images/gallery/kapchorwa-evangelism-outreach.jpg",
+    fullUrl: "/images/gallery/kapchorwa-evangelism-outreach.jpg",
+    description: "Ministers reaching souls on the streets, sharing the love and transformative power of Jesus Christ.",
+    date: "Community Outreach",
+    location: "Kapchorwa Municipality",
+  },
+  {
+    id: "kapchorwa-youth-preaching",
+    title: "Bold Proclamation of the Gospel",
+    category: "Kapchorwa Outreach",
+    thumbnailUrl: "/images/gallery/kapchorwa-youth-preaching.jpg",
+    fullUrl: "/images/gallery/kapchorwa-youth-preaching.jpg",
+    description: "Zealous young ministers proclaiming Christ without shame, igniting faith across the highland hills.",
+    date: "Open-Air Ministry",
+    location: "Kapchorwa Town",
+  },
+  {
+    id: "kapchorwa-district-headquarters-witnessing",
+    title: "Personal Evangelism at District Headquarters",
+    category: "Kapchorwa Outreach",
+    thumbnailUrl: "/images/gallery/kapchorwa-district-headquarters-witnessing.jpg",
+    fullUrl: "/images/gallery/kapchorwa-district-headquarters-witnessing.jpg",
+    description: "One-on-one ministry and prayer at Kapchorwa District Local Government Headquarters.",
+    date: "Civic & Marketplace Ministry",
+    location: "District Headquarters",
+  },
+  {
+    id: "kapchorwa-declaration-prayer",
+    title: "Prophetic Proclamation & Prayer Over the Highlands",
+    category: "Kapchorwa Outreach",
+    thumbnailUrl: "/images/gallery/kapchorwa-declaration-prayer.jpg",
+    fullUrl: "/images/gallery/kapchorwa-declaration-prayer.jpg",
+    description: "Lifting holy hands in prayer and decreeing the reign of Christ over the families and land of Kapchorwa.",
+    date: "Highland Intercession",
+    location: "Kapchorwa",
+  },
   {
     id: "drone-grounds",
     title: "Vast Ocean of Believers at Phaneroo Grounds",
@@ -139,10 +191,11 @@ const GALLERY_ITEMS: GalleryImage[] = [
 
 const CATEGORIES = [
   "All",
+  "Kapchorwa Outreach",
   "Worship & Celebration",
+  "Fellowship",
   "Apostle Grace Lubega",
   "Phaneroo Grounds",
-  "Fellowship",
 ] as const;
 
 export function GalleryClient() {
@@ -257,11 +310,19 @@ export function GalleryClient() {
 
               {/* Bottom Details Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-4 z-10 space-y-1">
-                {item.date && (
-                  <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider block">
-                    {item.date}
-                  </span>
-                )}
+                <div className="flex flex-wrap items-center gap-2">
+                  {item.date && (
+                    <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider block">
+                      {item.date}
+                    </span>
+                  )}
+                  {item.location && (
+                    <span className="text-[10px] font-medium text-neutral-300 flex items-center gap-0.5">
+                      <MapPin className="h-2.5 w-2.5 text-ochre-400" />
+                      {item.location}
+                    </span>
+                  )}
+                </div>
                 <h3 className="font-heading text-base font-bold text-white line-clamp-1 group-hover:text-amber-300 transition-colors">
                   {item.title}
                 </h3>
@@ -371,6 +432,12 @@ export function GalleryClient() {
                   {currentImage.date && (
                     <span className="text-xs text-neutral-400 font-medium">
                       {currentImage.date}
+                    </span>
+                  )}
+                  {currentImage.location && (
+                    <span className="text-xs text-amber-300 font-medium flex items-center gap-1">
+                      <MapPin className="h-3 w-3" />
+                      {currentImage.location}
                     </span>
                   )}
                   <span className="text-xs text-neutral-500">
