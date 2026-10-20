@@ -20,7 +20,7 @@ import {
 export interface GalleryImage {
   id: string;
   title: string;
-  category: "Kapchorwa Outreach" | "Worship & Celebration" | "Apostle Grace Lubega" | "Phaneroo Grounds" | "Fellowship";
+  category: "Kapchorwa Outreach" | "Cheptegei Foundation" | "Worship & Celebration" | "Apostle Grace Lubega" | "Phaneroo Grounds" | "Fellowship";
   thumbnailUrl: string;
   fullUrl: string;
   description: string;
@@ -118,6 +118,36 @@ const GALLERY_ITEMS: GalleryImage[] = [
     description: "Energized young disciples unified in vision, advancing the Kingdom across neighborhoods and hilltops.",
     date: "Youth Outreach 2026",
     location: "Kapchorwa Municipality",
+  },
+  {
+    id: "cheptegei-foundation-evening-service",
+    title: "Evening Fellowship Gathering — Cheptegei Foundation",
+    category: "Cheptegei Foundation",
+    thumbnailUrl: "/images/gallery/cheptegei-foundation-evening-service.jpg",
+    fullUrl: "/images/gallery/cheptegei-foundation-evening-service.jpg",
+    description: "Believers gathered under the highland evening sky at Joshua Cheptegei Foundation, feeding on the uncompromised Word.",
+    date: "Weekly Fellowship Service",
+    location: "Joshua Cheptegei Foundation, Kapchorwa",
+  },
+  {
+    id: "cheptegei-foundation-service-grounds",
+    title: "Open-Air Fellowship Grounds Overlooking the Valley",
+    category: "Cheptegei Foundation",
+    thumbnailUrl: "/images/gallery/cheptegei-foundation-service-grounds.jpg",
+    fullUrl: "/images/gallery/cheptegei-foundation-service-grounds.jpg",
+    description: "The scenic prayer and gathering grounds at the Cheptegei Foundation, set against the green mountain hills of Kapchorwa.",
+    date: "Sanctuary Grounds",
+    location: "Joshua Cheptegei Foundation Grounds",
+  },
+  {
+    id: "cheptegei-foundation-night-fellowship",
+    title: "Atmosphere of Word & Holy Spirit Impartation",
+    category: "Cheptegei Foundation",
+    thumbnailUrl: "/images/gallery/cheptegei-foundation-night-fellowship.jpg",
+    fullUrl: "/images/gallery/cheptegei-foundation-night-fellowship.jpg",
+    description: "Intense hunger and focus as saints listen attentively to the divine counsel during evening ministry sessions.",
+    date: "Night Fellowship",
+    location: "Joshua Cheptegei Foundation, Kapchorwa",
   },
   {
     id: "drone-grounds",
@@ -232,8 +262,9 @@ const GALLERY_ITEMS: GalleryImage[] = [
 const CATEGORIES = [
   "All",
   "Kapchorwa Outreach",
-  "Worship & Celebration",
+  "Cheptegei Foundation",
   "Fellowship",
+  "Worship & Celebration",
   "Apostle Grace Lubega",
   "Phaneroo Grounds",
 ] as const;
