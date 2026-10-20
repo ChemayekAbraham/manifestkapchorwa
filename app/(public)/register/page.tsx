@@ -30,7 +30,7 @@ interface RegistrationFormData {
 
 function RegisterFormContent() {
   const searchParams = useSearchParams();
-  const initialEmail = searchParams.get("email") || "";
+  const initialPhone = searchParams.get("phone") || "";
   const initialName = searchParams.get("name") || "";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -47,7 +47,7 @@ function RegisterFormContent() {
   } = useForm<RegistrationFormData>({
     defaultValues: {
       fullName: initialName,
-      email: initialEmail,
+      phone: initialPhone,
       category: "MEMBER",
       district: "Kapchorwa",
       website_hp: "",
@@ -55,9 +55,9 @@ function RegisterFormContent() {
   });
 
   useEffect(() => {
-    if (initialEmail) setValue("email", initialEmail);
+    if (initialPhone) setValue("phone", initialPhone);
     if (initialName) setValue("fullName", initialName);
-  }, [initialEmail, initialName, setValue]);
+  }, [initialPhone, initialName, setValue]);
 
   const onSubmit = async (data: RegistrationFormData) => {
     setIsSubmitting(true);
@@ -188,7 +188,7 @@ function RegisterFormContent() {
                   />
                 </div>
 
-                <div>
+                <div className="sm:col-span-2">
                   <Input
                     label="Phone Number (Uganda)"
                     required
@@ -198,25 +198,7 @@ function RegisterFormContent() {
                       minLength: { value: 8, message: "Please enter a valid phone number" },
                     })}
                     error={errors.phone?.message}
-                    helperText="Used for church SMS updates and pastoral check-ins"
-                  />
-                </div>
-
-                <div>
-                  <Input
-                    label="Email Address"
-                    required
-                    type="email"
-                    placeholder="e.g. joshua@gmail.com"
-                    {...register("email", {
-                      required: "Email address is compulsory",
-                      pattern: {
-                        value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/,
-                        message: "Please enter a valid email address (e.g. name@gmail.com)",
-                      },
-                    })}
-                    error={errors.email?.message}
-                    helperText="Required for check-in and membership records"
+                    helperText="Used for service check-in, church SMS updates, and pastoral care"
                   />
                 </div>
 

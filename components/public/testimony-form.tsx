@@ -102,7 +102,7 @@ export function TestimonyForm() {
           />
 
           <Input
-            label="Phone or Email (Optional)"
+            label="Phone Number (Optional)"
             placeholder="e.g. 0770 123456"
             {...register("contact")}
           />

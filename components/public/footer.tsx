@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export function Footer() {
   return (

@@ -115,8 +115,8 @@ export default function PrayerPage() {
               />
 
               <Input
-                label="Phone Number or Email (Optional)"
-                placeholder="e.g. 0770 123456 (if you would like a pastor to call you)"
+                label="Phone Number (Optional)"
+                placeholder="e.g. 0770 123456 (if you would like pastoral follow-up)"
                 {...register("contact")}
               />
 

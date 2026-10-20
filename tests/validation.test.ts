@@ -9,23 +9,21 @@ import { NewConvertSchema } from "../validators/convert";
 import { validateEmailAddress } from "../lib/email-validator";
 
 describe("Validation Schemas", () => {
-  it("validates valid public registration data with compulsory email", () => {
+  it("validates valid public registration data with phone number (email optional)", () => {
     const valid = PublicRegistrationSchema.safeParse({
       fullName: "Joshua Chemutai",
       phone: "0770123456",
-      email: "joshua.chemutai@gmail.com",
       village: "Cheptuya",
       category: "MEMBER",
       website_hp: "",
     });
     expect(valid.success).toBe(true);
 
-    const missingEmail = PublicRegistrationSchema.safeParse({
+    const missingPhone = PublicRegistrationSchema.safeParse({
       fullName: "Joshua Chemutai",
-      phone: "0770123456",
       village: "Cheptuya",
     });
-    expect(missingEmail.success).toBe(false);
+    expect(missingPhone.success).toBe(false);
   });
 
   it("rejects registration with populated honeypot bot field", () => {
@@ -80,14 +78,14 @@ describe("Validation Schemas", () => {
   it("validates service attendance check-in data", () => {
     const valid = ServiceCheckInSchema.safeParse({
       fullName: "Joshua Chemutai",
-      email: "joshua@example.com",
+      phone: "0770123456",
       serviceName: "Sunday First Service (9:00 AM – 10:45 AM E.A.T)",
     });
     expect(valid.success).toBe(true);
 
     const invalid = ServiceCheckInSchema.safeParse({
       fullName: "J",
-      email: "not-an-email",
+      phone: "123",
     });
     expect(invalid.success).toBe(false);
   });

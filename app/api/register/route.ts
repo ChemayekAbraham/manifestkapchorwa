@@ -40,24 +40,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, message: "Registration received" });
     }
 
-    // Deep email validation (including Google account format & MX verification)
-    const emailCheck = await validateEmailAddress(validated.data.email);
-    if (!emailCheck.isValid) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: emailCheck.error || "Please enter a valid email address.",
-          errors: { email: [emailCheck.error || "Invalid email address"] },
-        },
-        { status: 400 }
-      );
+    // Optional email validation (if provided)
+    let validatedEmail: string | null = null;
+    if (validated.data.email && validated.data.email.trim() !== "") {
+      const emailCheck = await validateEmailAddress(validated.data.email);
+      if (!emailCheck.isValid) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: emailCheck.error || "Please enter a valid email address.",
+            errors: { email: [emailCheck.error || "Invalid email address"] },
+          },
+          { status: 400 }
+        );
+      }
+      validatedEmail = emailCheck.normalizedEmail;
     }
 
     try {
       const person = await PeopleService.create({
         fullName: validated.data.fullName,
         phone: validated.data.phone,
-        email: emailCheck.normalizedEmail,
+        email: validatedEmail,
         gender: validated.data.gender || null,
         dateOfBirth: validated.data.dateOfBirth || null,
         village: validated.data.village || null,

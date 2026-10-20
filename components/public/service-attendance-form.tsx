@@ -38,7 +38,7 @@ export function ServiceAttendanceForm() {
     },
   });
 
-  const enteredEmail = watch("email");
+  const enteredPhone = watch("phone");
   const enteredName = watch("fullName");
 
   // Optionally fetch upcoming church events from database to enrich the dropdown
@@ -78,7 +78,7 @@ export function ServiceAttendanceForm() {
           setNotRegistered(true);
           setErrorMessage(
             json.message ||
-              "This email address is not registered in our church records. Please first register as a church member to check in for services."
+              "This phone number is not registered in our church records. Please first register as a church member to check in for services."
           );
         } else {
           setErrorMessage(json.message || "Unable to confirm attendance. Please try again.");
@@ -89,7 +89,7 @@ export function ServiceAttendanceForm() {
       setSuccessInfo(json.data);
       reset({
         fullName: "",
-        email: "",
+        phone: "",
         serviceName: data.serviceName,
       });
     } catch {
@@ -111,7 +111,7 @@ export function ServiceAttendanceForm() {
             Check In for Service Today
           </h3>
           <p className="text-xs sm:text-sm text-neutral-600">
-            Attending service today? Select your service, enter your name and registered email address to confirm your attendance.
+            Attending service today? Select your service, enter your name and phone number to confirm your attendance.
           </p>
         </div>
         <div className="hidden sm:flex h-12 w-12 rounded-2xl bg-highland-50 text-highland-700 items-center justify-center shrink-0">
@@ -150,13 +150,13 @@ export function ServiceAttendanceForm() {
                 <div className="space-y-1">
                   <h4 className="text-sm font-bold text-amber-900">Registration Required First</h4>
                   <p className="text-xs text-amber-800 leading-relaxed">
-                    We could not find a member account with the email <strong>{enteredEmail}</strong>. You must first register as a church member before checking in for services.
+                    We could not find a member account with the phone number <strong>{enteredPhone}</strong>. You must first register as a church member before checking in for services.
                   </p>
                 </div>
               </div>
               <div className="pt-2 flex flex-wrap gap-2">
                 <Link
-                  href={`/register?email=${encodeURIComponent(enteredEmail || "")}&name=${encodeURIComponent(enteredName || "")}`}
+                  href={`/register?phone=${encodeURIComponent(enteredPhone || "")}&name=${encodeURIComponent(enteredName || "")}`}
                 >
                   <Button size="sm" variant="clay" className="font-bold shadow-sm">
                     <UserPlus className="h-3.5 w-3.5 mr-1.5" />
@@ -173,7 +173,7 @@ export function ServiceAttendanceForm() {
                   }}
                   className="text-xs"
                 >
-                  Try a Different Email
+                  Try a Different Phone Number
                 </Button>
               </div>
             </div>
@@ -207,12 +207,15 @@ export function ServiceAttendanceForm() {
             />
 
             <Input
-              label="Registered Email Address"
-              type="email"
-              placeholder="e.g. joshua@example.com"
+              label="Phone Number"
+              placeholder="e.g. 0770 123456"
               required
-              {...register("email", { required: "Email address is required" })}
-              error={errors.email?.message}
+              {...register("phone", {
+                required: "Phone number is required",
+                minLength: { value: 8, message: "Please enter a valid phone number" },
+              })}
+              error={errors.phone?.message}
+              helperText="Required for check-in and membership records"
             />
           </div>
 

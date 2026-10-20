@@ -4,6 +4,8 @@ import { ServiceCheckInSchema } from "@/validators/check-in";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
+import { normalizeUgandanPhone } from "@/lib/phone";
+
 export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
@@ -26,22 +28,37 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: "Please select the service and enter your registered email address.",
+          message: "Please select the service and enter your registered phone number.",
           errors: validated.error.flatten().fieldErrors,
         },
         { status: 400 }
       );
     }
 
-    const { fullName, email, serviceName, serviceId } = validated.data;
-    const normalizedEmail = email.trim().toLowerCase();
+    const { fullName, phone, serviceName, serviceId } = validated.data;
+    const normalizedPhone = normalizeUgandanPhone(phone);
 
-    // 1. Check if person exists in the database by email
-    const person = await prisma.person.findFirst({
-      where: {
-        email: { equals: normalizedEmail, mode: "insensitive" },
-      },
-    });
+    // 1. Check if person exists in the database by phone or name
+    let person = null;
+
+    if (normalizedPhone) {
+      person = await prisma.person.findFirst({
+        where: {
+          OR: [
+            { phone: normalizedPhone },
+            { phone: phone.trim() },
+          ],
+        },
+      });
+    }
+
+    if (!person) {
+      person = await prisma.person.findFirst({
+        where: {
+          fullName: { equals: fullName.trim(), mode: "insensitive" },
+        },
+      });
+    }
 
     if (!person) {
       return NextResponse.json(
@@ -49,7 +66,7 @@ export async function POST(req: NextRequest) {
           success: false,
           notRegistered: true,
           message:
-            "This email is not registered in our church database. Please first register as a church member to attend and check in for services.",
+            "This phone number is not registered in our church database. Please first register as a church member to attend and check in for services.",
         },
         { status: 404 }
       );
