@@ -45,6 +45,16 @@ export const TEAM_MEMBERS: TeamMember[] = [
     bio: "Overseeing ministry financial stewardship, tithes and partnership records, financial accountability, and resource budgeting for Manifest Kapchorwa.",
     location: "Kapchorwa Town, Uganda",
   },
+  {
+    id: "kiplangat-louis",
+    name: "Kiplangat Louis",
+    role: "Assistant Admin",
+    phone: "+256766026044",
+    phoneFormatted: "+256 766 026 044 (0766026044)",
+    imageUrl: "/images/team/kiplangat-louis.jpg",
+    bio: "Assisting in ministry administration, service operations, media coordination, event execution, and member support for Manifest Kapchorwa.",
+    location: "Kapchorwa Town, Uganda",
+  },
 ];
 
 export function LeadershipSection() {
@@ -60,11 +70,7 @@ export function LeadershipSection() {
         </p>
       </div>
 
-      <div
-        className={`grid grid-cols-1 md:grid-cols-2 ${
-          TEAM_MEMBERS.length > 2 ? "lg:grid-cols-3 max-w-6xl" : "max-w-3xl"
-        } mx-auto gap-8 w-full`}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto w-full">
         {TEAM_MEMBERS.map((member) => (
           <div
             key={member.id}
