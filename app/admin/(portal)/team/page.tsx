@@ -281,26 +281,29 @@ export default function AdminTeamPage() {
               >
                 <div>
                   {/* Photo & Badge Header */}
-                  <div className="relative aspect-4/3 w-full bg-neutral-100 overflow-hidden">
+                  <div className="relative h-64 sm:h-72 w-full bg-neutral-900 overflow-hidden">
                     {member.imageUrl ? (
                       <Image
                         src={member.imageUrl}
                         alt={member.name}
                         fill
-                        className="object-cover object-top group-hover:scale-103 transition-transform duration-300"
+                        unoptimized
+                        priority
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="flex flex-col items-center justify-center h-full text-neutral-400 bg-neutral-50">
-                        <Users className="h-12 w-12 text-neutral-300" />
-                        <span className="text-xs mt-1">No portrait</span>
+                      <div className="flex flex-col items-center justify-center h-full text-neutral-400 bg-neutral-800">
+                        <Users className="h-16 w-16 text-neutral-500" />
+                        <span className="text-xs mt-2 text-neutral-400">No portrait photo</span>
                       </div>
                     )}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-transparent to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent pointer-events-none" />
 
                     {/* Order badge top-left */}
                     <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-                      <span className="h-6 px-2 rounded-md bg-neutral-900/80 backdrop-blur-xs text-white text-[11px] font-bold flex items-center justify-center border border-white/10">
+                      <span className="h-6 px-2 rounded-md bg-neutral-900/90 backdrop-blur-xs text-white text-[11px] font-bold flex items-center justify-center border border-white/10 shadow-xs">
                         #{member.order ?? 0}
                       </span>
                       <Badge
@@ -318,15 +321,15 @@ export default function AdminTeamPage() {
                       </Badge>
                     </div>
 
-                    {/* Leader Name overlay */}
+                    {/* Leader Name overlay on photo */}
                     <div className="absolute bottom-3 left-3 right-3 z-10 text-white">
-                      <h3 className="font-heading text-lg font-bold drop-shadow-sm">
+                      <h3 className="font-heading text-xl font-bold drop-shadow-md">
                         {member.name}
                       </h3>
                       {member.location && (
-                        <p className="text-[11px] text-neutral-200 flex items-center gap-1 mt-0.5">
-                          <MapPin className="h-3 w-3 text-amber-400" />
-                          <span>{member.location}</span>
+                        <p className="text-[11px] text-neutral-200 flex items-center gap-1 mt-0.5 drop-shadow-sm">
+                          <MapPin className="h-3 w-3 text-amber-400 shrink-0" />
+                          <span className="truncate">{member.location}</span>
                         </p>
                       )}
                     </div>
