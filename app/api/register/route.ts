@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PublicRegistrationSchema } from "@/validators/registration";
-import { PeopleService } from "@/services/people.service";
+import { PeopleService, DuplicateRecordError } from "@/services/people.service";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 import { validateEmailAddress } from "@/lib/email-validator";
@@ -80,18 +80,28 @@ export async function POST(req: NextRequest) {
         },
       });
     } catch (err: any) {
+      if (err instanceof DuplicateRecordError) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: err.message,
+            errors: { [err.field]: [err.message] },
+          },
+          { status: 409 }
+        );
+      }
+
+      logger.error("Database or service error during registration", { error: err?.message || err, ip });
       return NextResponse.json(
         {
           success: false,
-          message:
-            err.message ||
-            "A registration with this phone number or email may already exist. Please contact the church office if you believe this is an error.",
+          message: "Our registration database server is temporarily unavailable. Please try again shortly or contact church administration.",
         },
-        { status: 409 }
+        { status: 503 }
       );
     }
   } catch (error) {
-    logger.error("Error in /api/register", error);
+    logger.error("Unhandled error in /api/register", error);
     return NextResponse.json(
       { success: false, message: "Unable to complete registration. Please try again later." },
       { status: 500 }

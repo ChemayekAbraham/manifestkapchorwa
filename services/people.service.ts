@@ -3,6 +3,15 @@ import { normalizeUgandanPhone } from "@/lib/phone";
 import { PersonFilterInput, PersonInput } from "@/validators/person";
 import { Prisma } from "@prisma/client";
 
+export class DuplicateRecordError extends Error {
+  field: "email" | "phone";
+  constructor(message: string, field: "email" | "phone") {
+    super(message);
+    this.name = "DuplicateRecordError";
+    this.field = field;
+  }
+}
+
 export class PeopleService {
   /**
    * Check for duplicate person by email or phone with clear individual reasons
@@ -21,7 +30,7 @@ export class PeopleService {
       if (emailDuplicate) {
         return {
           type: "EMAIL" as const,
-          field: "email",
+          field: "email" as const,
           value: normalizedEmail,
           person: emailDuplicate,
           message: `The email address "${normalizedEmail}" already exists in our church records. Please enter a different email address.`,
@@ -39,7 +48,7 @@ export class PeopleService {
       if (phoneDuplicate) {
         return {
           type: "PHONE" as const,
-          field: "phone",
+          field: "phone" as const,
           value: normalizedPhone,
           person: phoneDuplicate,
           message: `The phone number "${normalizedPhone}" already exists in our church records. Please enter a different phone number.`,
@@ -60,7 +69,7 @@ export class PeopleService {
     if (normalizedPhone || normalizedEmail) {
       const duplicate = await this.findDuplicate(normalizedPhone, normalizedEmail);
       if (duplicate) {
-        throw new Error(duplicate.message);
+        throw new DuplicateRecordError(duplicate.message, duplicate.field);
       }
     }
 
@@ -99,7 +108,7 @@ export class PeopleService {
     if (normalizedPhone || normalizedEmail) {
       const duplicate = await this.findDuplicate(normalizedPhone, normalizedEmail, id);
       if (duplicate) {
-        throw new Error(duplicate.message);
+        throw new DuplicateRecordError(duplicate.message, duplicate.field);
       }
     }
 
