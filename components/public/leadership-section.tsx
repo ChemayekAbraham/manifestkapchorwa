@@ -1,73 +1,60 @@
 import React from "react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, Users } from "lucide-react";
+import { INITIAL_TEAM_MEMBERS } from "@/services/team.service";
 
-export interface TeamMember {
+export interface TeamMemberDisplay {
   id: string;
   name: string;
   role: string;
   phone: string;
-  phoneFormatted: string;
-  imageUrl: string;
-  bio: string;
-  location?: string;
+  imageUrl?: string | null;
+  bio?: string | null;
+  location?: string | null;
 }
 
-export const TEAM_MEMBERS: TeamMember[] = [
-  {
-    id: "zipporah-njeri",
-    name: "Zipporah Njeri",
-    role: "Team Leader",
-    phone: "+256752262410",
-    phoneFormatted: "+256 752 262 410 (0752262410)",
-    imageUrl: "/images/team/zipporah-njeri.jpg",
-    bio: "Guiding and coordinating the Manifest Kapchorwa fellowship team, overseeing weekly services, community outreach missions, pastoral care, and discipleship across the Sebei highlands.",
-    location: "Kapchorwa Town, Uganda",
-  },
-  {
-    id: "caleb-prince",
-    name: "Caleb Prince",
-    role: "Administrator",
-    phone: "+256778112567",
-    phoneFormatted: "+256 778 112 567 (0778112567)",
-    imageUrl: "/images/team/caleb-prince.jpg",
-    bio: "Overseeing ministry administration, service planning, operations logistics, communications, and member coordination for Manifest Kapchorwa.",
-    location: "Kapchorwa Town, Uganda",
-  },
-  {
-    id: "rhema-sarah",
-    name: "Rhema Sarah",
-    role: "Finance",
-    phone: "+256775097338",
-    phoneFormatted: "+256 775 097 338 (0775097338)",
-    imageUrl: "/images/team/rhema-sarah.jpg",
-    bio: "Overseeing ministry financial stewardship, tithes and partnership records, financial accountability, and resource budgeting for Manifest Kapchorwa.",
-    location: "Kapchorwa Town, Uganda",
-  },
-  {
-    id: "kiplangat-louis",
-    name: "Kiplangat Louis",
-    role: "Assistant Admin",
-    phone: "+256766026044",
-    phoneFormatted: "+256 766 026 044 (0766026044)",
-    imageUrl: "/images/team/kiplangat-louis.jpg",
-    bio: "Assisting in ministry administration, service operations, media coordination, event execution, and member support for Manifest Kapchorwa.",
-    location: "Kapchorwa Town, Uganda",
-  },
-  {
-    id: "kipsang-shedrack",
-    name: "Kipsang Shedrack",
-    role: "Media",
-    phone: "+256788284200",
-    phoneFormatted: "+256 788 284 200 (0788284200)",
-    imageUrl: "/images/team/kipsang-shedrack.jpg",
-    bio: "Directing ministry media, photography, livestreaming, sound engineering, visual projections, and digital communications for Manifest Kapchorwa services and missions.",
-    location: "Kapchorwa Town, Uganda",
-  },
-];
+function formatUgandanPhone(raw: string) {
+  const digits = raw.replace(/[^0-9]/g, "");
+  if (digits.startsWith("256") && digits.length === 12) {
+    const local = "0" + digits.slice(3);
+    return `+256 ${digits.slice(3, 6)} ${digits.slice(6, 9)} ${digits.slice(9)} (${local})`;
+  }
+  if (digits.startsWith("0") && digits.length === 10) {
+    return `+256 ${digits.slice(1, 4)} ${digits.slice(4, 7)} ${digits.slice(7)} (${digits})`;
+  }
+  return raw;
+}
 
-export function LeadershipSection() {
+function getTelUrl(raw: string) {
+  const digits = raw.replace(/[^0-9]/g, "");
+  if (digits.startsWith("0")) {
+    return `tel:+256${digits.slice(1)}`;
+  }
+  if (digits.startsWith("256")) {
+    return `tel:+${digits}`;
+  }
+  return `tel:${raw}`;
+}
+
+function getWhatsAppUrl(raw: string) {
+  const digits = raw.replace(/[^0-9]/g, "");
+  if (digits.startsWith("0")) {
+    return `https://wa.me/256${digits.slice(1)}`;
+  }
+  if (digits.startsWith("256")) {
+    return `https://wa.me/${digits}`;
+  }
+  return `https://wa.me/${digits}`;
+}
+
+interface LeadershipSectionProps {
+  members?: TeamMemberDisplay[];
+}
+
+export function LeadershipSection({ members }: LeadershipSectionProps) {
+  const teamList = members && members.length > 0 ? members : INITIAL_TEAM_MEMBERS;
+
   return (
     <section id="leadership" className="space-y-8 scroll-mt-24">
       <div className="text-center space-y-3">
@@ -81,84 +68,98 @@ export function LeadershipSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto w-full">
-        {TEAM_MEMBERS.map((member) => (
+        {teamList.map((member) => (
           <div
             key={member.id}
-            className="group rounded-3xl bg-white border border-neutral-200 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+            className="group rounded-3xl bg-white border border-neutral-200 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
           >
-            {/* Portrait Image Container */}
-            <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100">
-              <Image
-                src={member.imageUrl}
-                alt={member.name}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-75 transition-opacity" />
+            <div>
+              {/* Portrait Image Container */}
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100">
+                {member.imageUrl ? (
+                  <Image
+                    src={member.imageUrl}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full text-neutral-400 bg-neutral-100">
+                    <Users className="h-16 w-16 text-neutral-300" />
+                    <span className="text-xs mt-2 font-medium">Manifest Kapchorwa</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-65 group-hover:opacity-75 transition-opacity" />
 
-              {/* Role badge */}
-              <div className="absolute top-4 left-4 z-10">
-                <Badge variant="ochre" className="bg-amber-500 text-neutral-950 font-bold shadow-md">
-                  {member.role}
-                </Badge>
+                {/* Role badge */}
+                <div className="absolute top-4 left-4 z-10">
+                  <Badge variant="ochre" className="bg-amber-500 text-neutral-950 font-bold shadow-md">
+                    {member.role}
+                  </Badge>
+                </div>
+
+                {/* Bottom name overlay on photo */}
+                <div className="absolute bottom-4 left-4 right-4 z-10 text-white">
+                  <h3 className="font-heading text-xl font-bold drop-shadow-sm">
+                    {member.name}
+                  </h3>
+                  {member.location && (
+                    <p className="text-xs text-neutral-200 flex items-center gap-1 mt-0.5">
+                      <MapPin className="h-3 w-3 text-amber-400" />
+                      <span>{member.location}</span>
+                    </p>
+                  )}
+                </div>
               </div>
 
-              {/* Bottom name overlay on photo */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 text-white">
-                <h3 className="font-heading text-xl font-bold drop-shadow-sm">
-                  {member.name}
-                </h3>
-                {member.location && (
-                  <p className="text-xs text-neutral-200 flex items-center gap-1 mt-0.5">
-                    <MapPin className="h-3 w-3 text-amber-400" />
-                    <span>{member.location}</span>
+              {/* Details */}
+              <div className="p-6">
+                {member.bio ? (
+                  <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                    {member.bio}
+                  </p>
+                ) : (
+                  <p className="text-xs text-neutral-400 italic">
+                    Serving with the Manifest Kapchorwa fellowship team.
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Details & Actions */}
-            <div className="p-6 flex-1 flex flex-col justify-between space-y-5">
-              <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
-                {member.bio}
-              </p>
-
-              {/* Contact Actions */}
-              <div className="space-y-2.5 pt-4 border-t border-neutral-100">
-                <a
-                  href={`tel:${member.phone}`}
-                  className="flex items-center justify-between p-3 rounded-xl bg-highland-50 hover:bg-highland-100/80 border border-highland-200/60 text-highland-900 transition-colors group/link"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-8 w-8 rounded-lg bg-highland-600 text-white flex items-center justify-center shrink-0">
-                      <Phone className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-highland-700 block">
-                        Direct Contact
-                      </span>
-                      <span className="text-xs font-semibold">
-                        {member.phoneFormatted}
-                      </span>
-                    </div>
+            {/* Contact Actions */}
+            <div className="px-6 pb-6 pt-0 space-y-2.5">
+              <a
+                href={getTelUrl(member.phone)}
+                className="flex items-center justify-between p-3 rounded-xl bg-highland-50 hover:bg-highland-100/80 border border-highland-200/60 text-highland-900 transition-colors group/link"
+              >
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="h-8 w-8 rounded-lg bg-highland-600 text-white flex items-center justify-center shrink-0">
+                    <Phone className="h-4 w-4" />
                   </div>
-                  <span className="text-xs font-bold text-highland-700 group-hover/link:translate-x-0.5 transition-transform">
-                    Call ↗
-                  </span>
-                </a>
+                  <div className="truncate">
+                    <span className="text-[10px] uppercase font-bold text-highland-700 block">
+                      Direct Contact
+                    </span>
+                    <span className="text-xs font-semibold truncate block">
+                      {formatUgandanPhone(member.phone)}
+                    </span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-highland-700 group-hover/link:translate-x-0.5 transition-transform shrink-0 ml-2">
+                  Call ↗
+                </span>
+              </a>
 
-                <a
-                  href={`https://wa.me/${member.phone.replace("+", "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-colors"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
+              <a
+                href={getWhatsAppUrl(member.phone)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition-colors"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>Chat on WhatsApp</span>
+              </a>
             </div>
           </div>
         ))}

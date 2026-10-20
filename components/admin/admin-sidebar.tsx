@@ -7,6 +7,7 @@ import Image from "next/image";
 import {
   LayoutDashboard,
   Users,
+  UserCheck,
   Calendar,
   BookOpen,
   Sparkles,
@@ -31,6 +32,7 @@ export function AdminSidebar({ userRole, isOpen, onClose }: AdminSidebarProps) {
 
   const navigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+    { name: "Leadership Team", href: "/admin/team", icon: UserCheck },
     { name: "People / Members", href: "/admin/people", icon: Users },
     { name: "Salvation & Converts", href: "/admin/salvation", icon: Sparkles },
     { name: "Events & Attendance", href: "/admin/events", icon: Calendar },

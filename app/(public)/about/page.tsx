@@ -1,5 +1,6 @@
 import React from "react";
 import { ContentService } from "@/services/content.service";
+import { TeamService } from "@/services/team.service";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, ShieldCheck, Heart, Users, Compass } from "lucide-react";
@@ -14,10 +15,11 @@ export const metadata = {
 export const revalidate = 60;
 
 export default async function AboutPage() {
-  const [vision, mission, faith] = await Promise.all([
+  const [vision, mission, faith, teamMembers] = await Promise.all([
     ContentService.getContent("ABOUT_VISION"),
     ContentService.getContent("ABOUT_MISSION"),
     ContentService.getContent("ABOUT_STATEMENT_OF_FAITH"),
+    TeamService.getPublicMembers(),
   ]);
 
   return (
@@ -61,7 +63,7 @@ export default async function AboutPage() {
       </div>
 
       {/* Leadership & Ministry Team */}
-      <LeadershipSection />
+      <LeadershipSection members={teamMembers} />
 
       {/* Statement of Faith */}
       <div className="rounded-3xl bg-cream-100 border border-cream-200 p-6 sm:p-10 space-y-6">
