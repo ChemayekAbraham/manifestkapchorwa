@@ -3,6 +3,7 @@ import { ContentService } from "@/services/content.service";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, ShieldCheck, Heart, Users, Compass } from "lucide-react";
+import { LeadershipSection } from "@/components/public/leadership-section";
 
 export const metadata = {
   title: "About Us — Vision, Mission & Faith",
@@ -58,6 +59,9 @@ export default async function AboutPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Leadership & Ministry Team */}
+      <LeadershipSection />
 
       {/* Statement of Faith */}
       <div className="rounded-3xl bg-cream-100 border border-cream-200 p-6 sm:p-10 space-y-6">

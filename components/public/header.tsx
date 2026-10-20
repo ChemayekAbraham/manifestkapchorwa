@@ -21,6 +21,7 @@ import {
   MapPin,
   ArrowUpRight,
   Flame,
+  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -75,6 +76,14 @@ const EXPLORE_CATEGORIES = [
         icon: Camera,
         desc: "Moments in God's presence",
         gradient: "from-purple-500/20 to-pink-500/20 text-purple-600",
+      },
+      {
+        name: "Leadership Team",
+        href: "/about#leadership",
+        icon: Users,
+        desc: "Team leading Kapchorwa",
+        badge: "Team",
+        gradient: "from-amber-500/20 to-amber-600/20 text-amber-700",
       },
     ],
   },
