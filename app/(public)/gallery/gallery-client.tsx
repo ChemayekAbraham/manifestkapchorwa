@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,12 +16,13 @@ import {
   Share2,
   Check,
   MapPin,
+  ArrowRight,
 } from "lucide-react";
 
 export interface GalleryImage {
   id: string;
   title: string;
-  category: "Kapchorwa Outreach" | "Cheptegei Foundation" | "Worship & Celebration" | "Apostle Grace Lubega" | "Phaneroo Grounds" | "Fellowship";
+  category: "Street Outreach" | "Cheptegei Foundation";
   thumbnailUrl: string;
   fullUrl: string;
   description: string;
@@ -32,7 +34,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-street-mission-team",
     title: "Street Mission Outreach Team — Kapchorwa Town",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-street-mission-team.jpg",
     fullUrl: "/images/gallery/kapchorwa-street-mission-team.jpg",
     description: "Passionate brethren and ministers taking the Gospel to the streets and communities of Kapchorwa.",
@@ -42,7 +44,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-evangelism-outreach",
     title: "Taking the Word to the Marketplaces & Streets",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-evangelism-outreach.jpg",
     fullUrl: "/images/gallery/kapchorwa-evangelism-outreach.jpg",
     description: "Ministers reaching souls on the streets, sharing the love and transformative power of Jesus Christ.",
@@ -52,7 +54,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-youth-preaching",
     title: "Bold Proclamation of the Gospel",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-youth-preaching.jpg",
     fullUrl: "/images/gallery/kapchorwa-youth-preaching.jpg",
     description: "Zealous young ministers proclaiming Christ without shame, igniting faith across the highland hills.",
@@ -62,7 +64,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-district-headquarters-witnessing",
     title: "Personal Evangelism at District Headquarters",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-district-headquarters-witnessing.jpg",
     fullUrl: "/images/gallery/kapchorwa-district-headquarters-witnessing.jpg",
     description: "One-on-one ministry and prayer at Kapchorwa District Local Government Headquarters.",
@@ -72,7 +74,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-declaration-prayer",
     title: "Prophetic Proclamation & Prayer Over the Highlands",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-declaration-prayer.jpg",
     fullUrl: "/images/gallery/kapchorwa-declaration-prayer.jpg",
     description: "Lifting holy hands in prayer and decreeing the reign of Christ over the families and land of Kapchorwa.",
@@ -82,7 +84,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-roadside-worship-proclamation",
     title: "Roadside Worship & Open-Air Proclamation",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-roadside-worship-proclamation.jpg",
     fullUrl: "/images/gallery/kapchorwa-roadside-worship-proclamation.jpg",
     description: "Lifting up praises and declaring the Word of life along the busy streets and thoroughfares of Kapchorwa.",
@@ -92,7 +94,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-prophetic-direction",
     title: "Directing Hearts to the Savior",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-prophetic-direction.jpg",
     fullUrl: "/images/gallery/kapchorwa-prophetic-direction.jpg",
     description: "Pointing the lost to Christ Jesus with boldness, power, and fervent intercession alongside prayer partners.",
@@ -102,7 +104,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-marketplace-conversation",
     title: "Marketplace Evangelism & One-on-One Ministry",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-marketplace-conversation.jpg",
     fullUrl: "/images/gallery/kapchorwa-marketplace-conversation.jpg",
     description: "Engaging traders, shoppers, and community members with the Gospel of grace in Kapchorwa shopping centers.",
@@ -112,7 +114,7 @@ const GALLERY_ITEMS: GalleryImage[] = [
   {
     id: "kapchorwa-youth-mission-team",
     title: "Youth Evangelical Force on the Move",
-    category: "Kapchorwa Outreach",
+    category: "Street Outreach",
     thumbnailUrl: "/images/gallery/kapchorwa-youth-mission-team.jpg",
     fullUrl: "/images/gallery/kapchorwa-youth-mission-team.jpg",
     description: "Energized young disciples unified in vision, advancing the Kingdom across neighborhoods and hilltops.",
@@ -149,124 +151,12 @@ const GALLERY_ITEMS: GalleryImage[] = [
     date: "Night Fellowship",
     location: "Joshua Cheptegei Foundation, Kapchorwa",
   },
-  {
-    id: "drone-grounds",
-    title: "Vast Ocean of Believers at Phaneroo Grounds",
-    category: "Phaneroo Grounds",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2024/11/Drone-7-768x424.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2024/11/Drone-7.jpg",
-    description: "Aerial perspective of tens of thousands responding to the call of God's Word in Kampala.",
-    date: "Annual Celebration",
-  },
-  {
-    id: "apostle-grace-17",
-    title: "Apostle Grace Lubega Ministering with Power",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-17-768x1152.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-17-scaled.jpg",
-    description: "Expounding the mysteries of the Kingdom and releasing the prophetic word for the nations.",
-    date: "Anniversary Service",
-  },
-  {
-    id: "pmg-worship",
-    title: "Pure High Praises & Joyful Fellowship",
-    category: "Worship & Celebration",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2024/11/PMG_9127-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2024/11/PMG_9127.jpg",
-    description: "Every gathering is an unreserved altar of passionate praise and intense thanksgiving.",
-    date: "Sunday Gathering",
-  },
-  {
-    id: "altar-ministry-0j6a",
-    title: "Transformative Teaching of the Word",
-    category: "Worship & Celebration",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2024/11/0J6A0335-768x511.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2024/11/0J6A0335.jpg",
-    description: "Hungry hearts receiving divine impartation that shifts destiny and breaks limitations.",
-    date: "Weekly Fellowship",
-  },
-  {
-    id: "apostle-grace-18",
-    title: "The Heart of a Spiritual Father",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-18-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-18.jpg",
-    description: "Sharing the joy of salvation and fatherly blessing with the congregants.",
-    date: "Special Service",
-  },
-  {
-    id: "anniversary-guests-1",
-    title: "Celebration Guests & Partners",
-    category: "Fellowship",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Guests-1-scaled.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Guests-1-scaled.jpg",
-    description: "Partners, ministers, and invited guests joined in unified worship across all chapters.",
-    date: "Ministry Anniversary",
-  },
-  {
-    id: "apostle-grace-19",
-    title: "Standing in the Counsels of God",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-19-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-19-scaled.jpg",
-    description: "Declaring the mind and counsel of the Father to an attentive generation.",
-    date: "Prophetic Meeting",
-  },
-  {
-    id: "anniversary-guests-2",
-    title: "Believers Rejoicing in Faith",
-    category: "Fellowship",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Guests-2-scaled.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Guests-2-scaled.jpg",
-    description: "Joy unspeakable and full of glory as the miraculous manifested across the congregation.",
-    date: "Ministry Anniversary",
-  },
-  {
-    id: "apostle-grace-20",
-    title: "Anointed Apostolic Declaration",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-20-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-20-scaled.jpg",
-    description: "Releasing grace upon families, marketplace leaders, and ministers of the Gospel.",
-    date: "Celebration Service",
-  },
-  {
-    id: "apostle-grace-1",
-    title: "Apostle Grace Lubega — Make Manifest",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-1-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-1-scaled.jpg",
-    description: "Leading the body of Christ into maturity, authority, and intimacy with the Holy Spirit.",
-    date: "Global Broadcast",
-  },
-  {
-    id: "apostle-grace-3",
-    title: "Fervent Prayer & Deliverance",
-    category: "Worship & Celebration",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-3-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-3-scaled.jpg",
-    description: "Chains broken, lives restored, and sick bodies healed under the heavy power of God.",
-    date: "Miracle Service",
-  },
-  {
-    id: "apostle-grace-4",
-    title: "Deep Revelation in the Word",
-    category: "Apostle Grace Lubega",
-    thumbnailUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-4-768x512.jpg",
-    fullUrl: "https://phaneroo.org/wp-content/uploads/2025/08/Anniversary-Apostle-Grace-Lubega-4-scaled.jpg",
-    description: "Feeding believers with the strong meat of the Word, building solid foundations.",
-    date: "Thursdays 5PM E.A.T",
-  },
 ];
 
 const CATEGORIES = [
   "All",
-  "Kapchorwa Outreach",
+  "Street Outreach",
   "Cheptegei Foundation",
-  "Fellowship",
-  "Worship & Celebration",
-  "Apostle Grace Lubega",
-  "Phaneroo Grounds",
 ] as const;
 
 export function GalleryClient() {
@@ -406,31 +296,29 @@ export function GalleryClient() {
         ))}
       </div>
 
-      {/* Official Phaneroo Gallery Attribution Banner */}
-      <div className="rounded-3xl bg-neutral-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-neutral-800 shadow-xl">
+      {/* Manifest Kapchorwa Fellowship Banner */}
+      <div className="rounded-3xl bg-highland-950 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-highland-800 shadow-xl">
         <div className="space-y-1 text-center sm:text-left">
           <div className="flex items-center justify-center sm:justify-start gap-2">
-            <Camera className="h-5 w-5 text-amber-400" />
+            <MapPin className="h-5 w-5 text-amber-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-              Phaneroo Global Media
+              Manifest Kapchorwa Sanctuary
             </span>
           </div>
           <h4 className="font-heading text-xl sm:text-2xl font-bold text-white">
-            Explore More Moments on phaneroo.org
+            Join Us at the Joshua Cheptegei Foundation
           </h4>
-          <p className="text-xs sm:text-sm text-neutral-400 max-w-xl">
-            Thousands of high-definition photographs documenting God’s glorious work across weekly services, crusades, and celebrations worldwide.
+          <p className="text-xs sm:text-sm text-highland-100/90 max-w-xl">
+            Every Thursday fellowship and Sunday service in Kapchorwa Town. Experience life-transforming worship, fellowship, and the living Word in the highlands.
           </p>
         </div>
-        <a
-          href="https://phaneroo.org/gallery/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold px-5 py-3 text-xs sm:text-sm transition-all shadow-lg shrink-0"
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-2 rounded-xl bg-highland-500 hover:bg-highland-400 text-white font-bold px-5 py-3 text-xs sm:text-sm transition-all shadow-lg shrink-0"
         >
-          <span>Visit Phaneroo Gallery</span>
-          <ExternalLink className="h-4 w-4" />
-        </a>
+          <span>View Service Times</span>
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
 
       {/* Lightbox Modal */}
