@@ -75,21 +75,15 @@ export function LeadershipSection({ members }: LeadershipSectionProps) {
           >
             <div>
               {/* Portrait Image Container */}
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-100">
-                {member.imageUrl ? (
-                  <Image
-                    src={member.imageUrl}
-                    alt={member.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center h-full text-neutral-400 bg-neutral-100">
-                    <Users className="h-16 w-16 text-neutral-300" />
-                    <span className="text-xs mt-2 font-medium">Manifest Kapchorwa</span>
-                  </div>
-                )}
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-900">
+                <Image
+                  src={member.imageUrl || "/images/team/avatar-male.jpg"}
+                  alt={member.name}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent opacity-65 group-hover:opacity-75 transition-opacity" />
 
                 {/* Role badge */}

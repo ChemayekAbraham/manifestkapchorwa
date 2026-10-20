@@ -56,6 +56,28 @@ export const INITIAL_TEAM_MEMBERS = [
     order: 5,
     active: true,
   },
+  {
+    id: "cheptegei-laban",
+    name: "Cheptegei Laban",
+    role: "Logistics & Setups",
+    phone: "+256762394808",
+    imageUrl: "/images/team/cheptegei-laban.jpg",
+    bio: "Coordinating hall and sanctuary preparations, sound machine setups, seating arrangements, and logistical organization for all Manifest Kapchorwa services and missions.",
+    location: "Kapchorwa Town, Uganda",
+    order: 6,
+    active: true,
+  },
+  {
+    id: "dorcus-chelangat",
+    name: "Dorcus Chelangat",
+    role: "Outreach",
+    phone: "+256775219316",
+    imageUrl: "/images/team/dorcus-chelangat.jpg",
+    bio: "Leading community evangelism, outdoor witnessing, marketplace gospel missions, and discipleship visitations across Kapchorwa municipality.",
+    location: "Kapchorwa Town, Uganda",
+    order: 7,
+    active: true,
+  },
 ];
 
 export interface CreateTeamMemberInput {

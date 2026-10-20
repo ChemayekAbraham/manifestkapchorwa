@@ -261,6 +261,24 @@ export function TeamMemberModal({
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
               />
+
+              <div className="flex items-center gap-2 pt-1 text-xs text-neutral-500">
+                <span className="text-[11px] font-medium">No photo yet?</span>
+                <button
+                  type="button"
+                  onClick={() => setImageUrl("/images/team/avatar-male.jpg")}
+                  className="text-[11px] font-bold text-highland-700 hover:underline px-2 py-0.5 rounded-md bg-white border border-neutral-200 shadow-2xs"
+                >
+                  + Male Avatar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setImageUrl("/images/team/avatar-female.jpg")}
+                  className="text-[11px] font-bold text-highland-700 hover:underline px-2 py-0.5 rounded-md bg-white border border-neutral-200 shadow-2xs"
+                >
+                  + Female Avatar
+                </button>
+              </div>
             </div>
           </div>
         </div>
