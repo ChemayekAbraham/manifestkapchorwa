@@ -183,8 +183,8 @@ export function Header() {
           mobileMenuOpen
             ? "py-3 bg-white text-neutral-900 border-b border-neutral-200 shadow-md"
             : scrolled
-            ? "py-2 sm:py-3 bg-white/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b border-neutral-200/80 text-neutral-900"
-            : "py-3 sm:py-4 bg-white/95 backdrop-blur-md shadow-xs border-b border-neutral-200/80 text-neutral-900"
+            ? "py-2 sm:py-3 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b border-neutral-200 text-neutral-900"
+            : "py-3 sm:py-4 bg-white shadow-xs border-b border-neutral-200 text-neutral-900"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,7 +285,7 @@ export function Header() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.96 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute right-0 top-full mt-3 w-[620px] rounded-3xl bg-white/95 backdrop-blur-2xl border border-neutral-200/90 shadow-[0_20px_50px_rgba(0,0,0,0.18)] p-5 z-50 text-neutral-900"
+                      className="absolute right-0 top-full mt-3 w-[620px] rounded-3xl bg-white border border-neutral-200 shadow-[0_20px_60px_rgba(0,0,0,0.22)] p-5 z-50 text-neutral-900"
                     >
                       <div className="grid grid-cols-3 gap-5">
                         {EXPLORE_CATEGORIES.map((section, sIdx) => (
