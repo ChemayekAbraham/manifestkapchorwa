@@ -50,6 +50,16 @@ export const metadata: Metadata = {
   verification: {
     google: "googledc88208238aa95e5",
   },
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
 };
 
 export const viewport: Viewport = {
