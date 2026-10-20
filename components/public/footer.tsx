@@ -74,11 +74,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/merchandise" className="text-ochre-300 hover:text-white transition-colors font-medium">
-                  Ministry Merchandise Store
-                </Link>
-              </li>
-              <li>
                 <Link href="/salvation" className="hover:text-white transition-colors">
                   New Converts Registration (Salvation)
                 </Link>

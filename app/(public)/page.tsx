@@ -11,7 +11,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Sparkles,
-  ShoppingBag,
   Camera,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -337,80 +336,48 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* 9. MERCHANDISE & GALLERY SHOWCASE */}
+      {/* 9. KAPCHORWA PHOTO & OUTREACH GALLERY SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card 1: Official Merchandise */}
-          <MotionCard delay={0.1}>
-            <div className="h-full rounded-3xl bg-neutral-900 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-neutral-800 shadow-xl relative overflow-hidden group">
-              <div className="space-y-3 relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold">
-                  <ShoppingBag className="h-3.5 w-3.5" />
-                  <span>distribution.phaneroo.org</span>
-                </div>
-                <h3 className="font-heading text-2xl font-bold text-white">
-                  Official Ministry Merchandise
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                  Discover official Phaneroo T-shirts, embroidered caps, fleece hoodies, and lifestyle bags. Order with convenient pickup in Kapchorwa Town or delivery across Uganda.
-                </p>
-              </div>
-
-              <div className="pt-2 flex items-center justify-between relative z-10">
-                <span className="text-xs font-semibold text-amber-400">From UGX 15,000</span>
-                <Link href="/merchandise">
-                  <Button size="sm" className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold gap-1 text-xs">
-                    <span>Explore Store</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
-              </div>
+        <MotionCard delay={0.1}>
+          <div className="rounded-3xl bg-highland-950 text-white p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 border border-highland-800 shadow-2xl relative overflow-hidden group">
+            {/* Photo backdrop */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              <Image
+                src="/images/gallery/kapchorwa-street-mission-team.jpg"
+                alt="Kapchorwa Street Mission"
+                fill
+                className="object-cover opacity-20 group-hover:scale-105 group-hover:opacity-30 transition-all duration-700 ease-out"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-highland-950 via-highland-950/85 to-highland-900/60" />
             </div>
-          </MotionCard>
 
-          {/* Card 2: Photo Gallery */}
-          <MotionCard delay={0.2}>
-            <div className="h-full rounded-3xl bg-highland-950 text-white p-6 sm:p-8 flex flex-col justify-between space-y-6 border border-highland-800 shadow-xl relative overflow-hidden group">
-              {/* Photo backdrop */}
-              <div className="absolute inset-0 z-0 overflow-hidden">
-                <Image
-                  src="/images/gallery/kapchorwa-street-mission-team.jpg"
-                  alt="Kapchorwa Street Mission"
-                  fill
-                  className="object-cover opacity-25 group-hover:scale-105 group-hover:opacity-35 transition-all duration-700 ease-out"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-highland-950 via-highland-950/80 to-highland-900/40" />
-              </div>
-
-              <div className="space-y-3 relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold">
-                  <Camera className="h-3.5 w-3.5 text-amber-300" />
-                  <span>Kapchorwa & Global Moments</span>
-                </div>
-                <h3 className="font-heading text-2xl font-bold text-white">
-                  Photo & Outreach Gallery
-                </h3>
-                <p className="text-xs sm:text-sm text-highland-100/90 leading-relaxed">
-                  Witness the move of God in the highlands — street evangelism, open-air preaching, civic outreach across Kapchorwa, and glorious Phaneroo gatherings.
-                </p>
-              </div>
-
-              <div className="pt-2 flex items-center justify-between relative z-10">
-                <span className="text-xs font-semibold text-amber-300 flex items-center gap-1">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  New Outreach Photos
+            <div className="space-y-4 relative z-10 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/20 text-xs font-bold">
+                <Camera className="h-3.5 w-3.5 text-amber-300" />
+                <span>Kapchorwa In Pictures</span>
+                <span className="text-amber-300 text-[10px] font-extrabold uppercase ml-1 px-1.5 py-0.5 rounded bg-amber-400/20">
+                  New Photos
                 </span>
-                <Link href="/gallery">
-                  <Button size="sm" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white/30 font-bold gap-1 text-xs">
-                    <span>View Gallery</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Button>
-                </Link>
               </div>
+              <h3 className="font-heading text-2xl sm:text-4xl font-bold text-white leading-tight">
+                Photo & Outreach Gallery
+              </h3>
+              <p className="text-xs sm:text-base text-highland-100/90 leading-relaxed">
+                Witness authentic moments of street evangelism, open-air preaching across Kapchorwa Town, and weekly fellowship at the Joshua Cheptegei Foundation in the scenic highlands.
+              </p>
             </div>
-          </MotionCard>
-        </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 relative z-10 shrink-0 w-full sm:w-auto">
+              <Link href="/gallery" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto bg-highland-500 hover:bg-highland-400 text-white font-bold gap-2 text-sm shadow-lg px-6 py-6 rounded-xl">
+                  <span>Explore Photo Gallery</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </MotionCard>
       </section>
 
       {/* 10. BOTTOM BANNER CTA */}
