@@ -7,9 +7,9 @@ async function main() {
   console.log("🌱 Starting Manifest Kapchorwa database seed...");
 
   // 1. Seed SUPER_ADMIN
-  const adminEmail = (process.env.SEED_ADMIN_EMAIL || "admin@manifestkapchorwa.org").toLowerCase().trim();
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "KapchorwaAdmin2026!Secure";
-  const adminName = process.env.SEED_ADMIN_NAME || "Senior Administrator";
+  const adminEmail = (process.env.SEED_ADMIN_EMAIL || "luisekiplangat@gmail.com").toLowerCase().trim();
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD || "Kapchorwa2026";
+  const adminName = process.env.SEED_ADMIN_NAME || "Luis Kiplangat";
 
   const passwordHash = await bcrypt.hash(adminPassword, 10);
 
