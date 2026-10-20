@@ -23,9 +23,9 @@ export default async function ServicesPage() {
     schedules = JSON.parse(serviceContent.content);
   } catch {
     schedules = [
-      { name: "Sunday First Service", day: "Sunday", time: "9:00 AM - 10:45 AM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
-      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
-      { name: "Thursday Fellowship Service", day: "Thursday", time: "5:00 PM - 7:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
+      { name: "Sunday First Service", day: "Sunday", time: "9:00 AM - 11:00 AM E.A.T", location: "Cheptegei Foundation Grounds / Main Sanctuary" },
+      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM E.A.T", location: "Cheptegei Foundation Grounds / Main Sanctuary" },
+      { name: "Thursday Fellowship Service", day: "Thursday", time: "5:00 PM - 9:00 PM E.A.T", location: "Cheptegei Foundation Grounds / Main Sanctuary" },
       { name: "Highlands Overnight Prayer Summit", day: "Monthly", time: "9:00 PM - 5:00 AM", location: "Main Sanctuary" },
     ];
   }
@@ -158,7 +158,7 @@ export default async function ServicesPage() {
               <div>
                 <h4 className="font-heading text-2xl font-black text-white">THURSDAYS</h4>
                 <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">5:00 PM</span>
+                  <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">5:00 PM – 9:00 PM</span>
                   <span className="text-sm font-bold text-amber-400">E.A.T</span>
                 </div>
               </div>
@@ -179,18 +179,18 @@ export default async function ServicesPage() {
               </div>
               <div>
                 <h4 className="font-heading text-2xl font-black text-white">SUNDAYS</h4>
-                <div className="mt-2 grid grid-cols-2 gap-3">
+                <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="bg-neutral-950/60 p-3 rounded-xl border border-neutral-800">
                     <span className="text-[11px] font-bold text-neutral-400 block uppercase">First Service</span>
                     <div className="flex items-baseline gap-1 mt-0.5">
-                      <span className="text-xl sm:text-2xl font-black text-white">9:00 AM</span>
+                      <span className="text-lg sm:text-xl font-black text-white">9:00 AM – 11:00 AM</span>
                       <span className="text-[11px] font-bold text-amber-400">E.A.T</span>
                     </div>
                   </div>
                   <div className="bg-neutral-950/60 p-3 rounded-xl border border-neutral-800">
                     <span className="text-[11px] font-bold text-neutral-400 block uppercase">Second Service</span>
                     <div className="flex items-baseline gap-1 mt-0.5">
-                      <span className="text-xl sm:text-2xl font-black text-white">11:00 AM</span>
+                      <span className="text-lg sm:text-xl font-black text-white">11:00 AM – 1:30 PM</span>
                       <span className="text-[11px] font-bold text-amber-400">E.A.T</span>
                     </div>
                   </div>

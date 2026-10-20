@@ -109,7 +109,7 @@ export function Footer() {
             <div className="space-y-2.5 text-xs text-neutral-300">
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
                 <span className="font-semibold text-ochre-400 block">Sunday 1st Service</span>
-                <span className="text-neutral-300">9:00 AM – 10:45 AM E.A.T</span>
+                <span className="text-neutral-300">9:00 AM – 11:00 AM E.A.T</span>
               </div>
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
                 <span className="font-semibold text-ochre-400 block">Sunday 2nd Service</span>
@@ -117,7 +117,7 @@ export function Footer() {
               </div>
               <div className="bg-highland-900/60 p-2.5 rounded-lg border border-highland-800/60">
                 <span className="font-semibold text-ochre-400 block">Thursday Fellowship Service</span>
-                <span className="text-neutral-300">5:00 PM – 7:30 PM E.A.T</span>
+                <span className="text-neutral-300">5:00 PM – 9:00 PM E.A.T</span>
               </div>
             </div>
           </div>

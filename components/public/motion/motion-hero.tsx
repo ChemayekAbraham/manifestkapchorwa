@@ -85,7 +85,7 @@ export function MotionHero({ heroContentText }: MotionHeroProps) {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-highland-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-highland-400" />
             </span>
-            <span>Sunday Celebrations: 9:00 AM & 11:00 AM E.A.T</span>
+            <span>Sunday Celebrations: 9:00 AM – 11:00 AM & 11:00 AM – 1:30 PM E.A.T</span>
             <span className="text-white/40">•</span>
             <span className="text-ochre-300 font-bold hidden sm:inline">Kapchorwa Sanctuary</span>
           </div>
@@ -214,13 +214,13 @@ export function MotionHero({ heroContentText }: MotionHeroProps) {
           <div className="bg-neutral-900/70 rounded-2xl p-4 border border-white/15 backdrop-blur-md shadow-sm hover:border-highland-400/40 transition-colors">
             <span className="text-xs text-highland-400 block font-semibold">Sunday Services</span>
             <span className="font-heading font-bold text-sm sm:text-base text-white">
-              9:00 AM & 11:00 AM
+              9:00 AM – 11:00 AM & 11:00 AM – 1:30 PM
             </span>
           </div>
           <div className="bg-neutral-900/70 rounded-2xl p-4 border border-white/15 backdrop-blur-md shadow-sm hover:border-highland-400/40 transition-colors">
             <span className="text-xs text-highland-400 block font-semibold">Thursday Service</span>
             <span className="font-heading font-bold text-sm sm:text-base text-white">
-              Thurs 5:00 PM
+              Thurs 5:00 PM – 9:00 PM
             </span>
           </div>
           <div className="col-span-2 sm:col-span-1 bg-neutral-900/70 rounded-2xl p-4 border border-white/15 backdrop-blur-md shadow-sm hover:border-highland-400/40 transition-colors">

@@ -167,11 +167,11 @@ export function Header() {
           <div className="flex items-center gap-5 text-neutral-300">
             <span className="flex items-center gap-1.5">
               <Flame className="h-3 w-3 text-amber-400" />
-              <span>Sunday Services: <strong className="text-white">9:00 AM & 11:00 AM</strong></span>
+              <span>Sunday Services: <strong className="text-white">9:00 AM – 11:00 AM & 11:00 AM – 1:30 PM</strong></span>
             </span>
             <span className="text-white/20">|</span>
             <span className="text-highland-300">
-              Thursday Fellowship: <strong className="text-white">5:00 PM</strong>
+              Thursday Fellowship: <strong className="text-white">5:00 PM – 9:00 PM</strong>
             </span>
           </div>
         </div>

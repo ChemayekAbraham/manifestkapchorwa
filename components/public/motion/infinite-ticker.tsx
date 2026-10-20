@@ -6,9 +6,9 @@ import { Sparkles, Church, Heart, Flame, Shield, Compass } from "lucide-react";
 const TICKER_ITEMS = [
   { text: "Word of Truth & Life", icon: Sparkles },
   { text: "Holy Spirit Revival in the Highlands", icon: Flame },
-  { text: "Sunday Celebrations: 9:00 AM & 11:00 AM", icon: Church },
+  { text: "Sunday Celebrations: 9:00 AM – 11:00 AM & 11:00 AM – 1:30 PM", icon: Church },
   { text: "Supernatural Grace & Salvation", icon: Heart },
-  { text: "Thursday Word Fellowship: 5:00 PM", icon: Compass },
+  { text: "Thursday Word Fellowship: 5:00 PM – 9:00 PM", icon: Compass },
   { text: "Transforming Families & Generations", icon: Shield },
   { text: "Kapchorwa Town, Sebei Sub-Region", icon: Church },
 ];

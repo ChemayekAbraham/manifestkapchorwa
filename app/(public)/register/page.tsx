@@ -113,7 +113,7 @@ function RegisterFormContent() {
 
           <div className="rounded-2xl bg-cream-50 border border-cream-200 p-4 text-xs text-neutral-700 space-y-1">
             <p className="font-semibold">Join us this week:</p>
-            <p>Sunday Services: 9:00 AM & 11:00 AM E.A.T | Thursday Fellowship: 5:00 PM E.A.T</p>
+            <p>Sunday Services: 9:00 AM – 11:00 AM & 11:00 AM – 1:30 PM E.A.T | Thursday Fellowship: 5:00 PM – 9:00 PM E.A.T</p>
             <p>Joshua Cheptegei Foundation Office, Kapchorwa Town</p>
           </div>
 

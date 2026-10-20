@@ -12,9 +12,9 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceCheckInInput } from "@/validators/check-in";
 
 const DEFAULT_SERVICES = [
-  "Sunday First Service (9:00 AM – 10:45 AM E.A.T)",
+  "Sunday First Service (9:00 AM – 11:00 AM E.A.T)",
   "Sunday Second Service (11:00 AM – 1:30 PM E.A.T)",
-  "Thursday Fellowship Service (5:00 PM – 7:30 PM E.A.T)",
+  "Thursday Fellowship Service (5:00 PM – 9:00 PM E.A.T)",
   "Highlands Overnight Prayer Summit",
   "Special Celebration & Thanksgiving Service",
 ];

@@ -29,9 +29,9 @@ export const DEFAULT_WEBSITE_SECTIONS = [
     key: "SERVICE_SCHEDULE",
     title: "Weekly Service Times",
     content: JSON.stringify([
-      { name: "Sunday First Service", day: "Sunday", time: "9:00 AM - 10:45 AM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
-      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
-      { name: "Thursday Fellowship Service", day: "Thursday", time: "5:00 PM - 7:30 PM E.A.T", location: "Phaneroo Grounds / Main Sanctuary" },
+      { name: "Sunday First Service", day: "Sunday", time: "9:00 AM - 11:00 AM E.A.T", location: "Joshua Cheptegei Foundation Grounds / Main Sanctuary" },
+      { name: "Sunday Second Service", day: "Sunday", time: "11:00 AM - 1:30 PM E.A.T", location: "Joshua Cheptegei Foundation Grounds / Main Sanctuary" },
+      { name: "Thursday Fellowship Service", day: "Thursday", time: "5:00 PM - 9:00 PM E.A.T", location: "Joshua Cheptegei Foundation Grounds / Main Sanctuary" },
       { name: "Highlands Overnight Prayer Summit", day: "Monthly", time: "9:00 PM - 5:00 AM", location: "Main Sanctuary" },
     ]),
   },

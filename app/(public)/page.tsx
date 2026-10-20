@@ -160,7 +160,7 @@ export default async function HomePage() {
                   </div>
                   <div className="space-y-1">
                     <h4 className="font-heading font-bold text-neutral-900">Sunday First Service</h4>
-                    <p className="text-xs text-neutral-500">9:00 AM – 10:45 AM E.A.T | Phaneroo Grounds</p>
+                    <p className="text-xs text-neutral-500">9:00 AM – 11:00 AM E.A.T | Cheptegei Foundation Grounds</p>
                   </div>
                 </div>
 
@@ -170,7 +170,7 @@ export default async function HomePage() {
                   </div>
                   <div className="space-y-1">
                     <h4 className="font-heading font-bold text-neutral-900">Sunday Second Service</h4>
-                    <p className="text-xs text-neutral-500">11:00 AM – 1:30 PM E.A.T | Phaneroo Grounds</p>
+                    <p className="text-xs text-neutral-500">11:00 AM – 1:30 PM E.A.T | Cheptegei Foundation Grounds</p>
                   </div>
                 </div>
 
@@ -180,7 +180,7 @@ export default async function HomePage() {
                   </div>
                   <div className="space-y-1">
                     <h4 className="font-heading font-bold text-neutral-900">Thursday Fellowship Service</h4>
-                    <p className="text-xs text-neutral-500">5:00 PM – 7:30 PM E.A.T | Phaneroo Grounds</p>
+                    <p className="text-xs text-neutral-500">5:00 PM – 9:00 PM E.A.T | Cheptegei Foundation Grounds</p>
                   </div>
                 </div>
 
@@ -189,9 +189,9 @@ export default async function HomePage() {
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Phaneroo Global</span>
-                      <span className="text-[10px] text-neutral-400">Phaneroo Grounds • E.A.T</span>
+                      <span className="text-[10px] text-neutral-400">E.A.T</span>
                     </div>
-                    <h4 className="font-heading text-sm font-bold text-white">Thurs 5PM • Sun 9AM & 11AM</h4>
+                    <h4 className="font-heading text-sm font-bold text-white">Thurs 5PM – 9PM • Sun 9AM – 11AM & 11AM – 1:30PM</h4>
                   </div>
                   <Link href="/services">
                     <Button size="sm" variant="clay" className="text-xs font-bold shrink-0">
