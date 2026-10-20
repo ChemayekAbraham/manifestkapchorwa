@@ -68,7 +68,7 @@ export default async function AboutPage() {
       {/* Statement of Faith */}
       <div className="rounded-3xl bg-cream-100 border border-cream-200 p-6 sm:p-10 space-y-6">
         <div className="space-y-2">
-          <Badge variant="ochre">Our Foundation • phaneroo.org</Badge>
+          <Badge variant="ochre">Our Foundation</Badge>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-neutral-900">{faith.title}</h2>
           <p className="text-xs sm:text-sm text-neutral-600">
             As articulated by Phaneroo Ministries International (Apostle Grace Lubega):
@@ -146,15 +146,7 @@ export default async function AboutPage() {
         </div>
 
         <div className="pt-2 flex items-center justify-between flex-wrap gap-4 border-t border-cream-300">
-          <span className="text-xs text-neutral-500">Official statement from Phaneroo Ministries International</span>
-          <a
-            href="https://phaneroo.org/our-statement-of-faith/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-bold text-highland-700 hover:text-highland-900 underline"
-          >
-            Read on phaneroo.org ↗
-          </a>
+          <span className="text-xs text-neutral-500">Rooted in Biblical Truth and Apostolic Doctrine</span>
         </div>
       </div>
 

@@ -133,13 +133,13 @@ export default async function ServicesPage() {
               </p>
             </div>
             <a
-              href="https://phaneroo.org/live/"
+              href="https://www.youtube.com/@phaneroo/live"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 px-5 py-2.5 text-xs font-bold transition-all shadow-lg hover:shadow-amber-500/20 shrink-0"
             >
               <span className="h-2 w-2 rounded-full bg-red-600 animate-ping"></span>
-              <span>Watch Phaneroo Live</span>
+              <span>Watch Live on YouTube</span>
             </a>
           </div>
 
@@ -203,17 +203,7 @@ export default async function ServicesPage() {
           </div>
 
           {/* Online Channels & Broadcast Links */}
-          <div className="pt-2 border-t border-neutral-800 grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <a
-              href="https://phaneroo.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all"
-            >
-              <span className="text-xs font-semibold text-neutral-200">Phaneroo Website</span>
-              <span className="text-xs text-amber-400 font-medium">phaneroo.org ↗</span>
-            </a>
-
+          <div className="pt-2 border-t border-neutral-800 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <a
               href="https://www.youtube.com/@phaneroo"
               target="_blank"
@@ -225,13 +215,13 @@ export default async function ServicesPage() {
             </a>
 
             <a
-              href="https://phaneroo.org/broadcast/"
+              href="https://www.youtube.com/@phaneroo/streams"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 transition-all"
             >
-              <span className="text-xs font-semibold text-neutral-200">Manifest Television</span>
-              <span className="text-xs text-amber-400 font-medium">TV Broadcasts ↗</span>
+              <span className="text-xs font-semibold text-neutral-200">Manifest Broadcasts</span>
+              <span className="text-xs text-amber-400 font-medium">Live Streams ↗</span>
             </a>
           </div>
         </div>

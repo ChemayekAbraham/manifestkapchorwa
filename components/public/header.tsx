@@ -19,7 +19,6 @@ import {
   HeartHandshake,
   Compass,
   MapPin,
-  ArrowUpRight,
   Flame,
   Users,
 } from "lucide-react";
@@ -344,15 +343,6 @@ export function Header() {
                           <MapPin className="h-3 w-3 text-highland-600" />
                           <span>Kapchorwa Sanctuary • Eastern Uganda</span>
                         </span>
-                        <a
-                          href="https://phaneroo.org"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-highland-700 font-bold hover:underline"
-                        >
-                          <span>Phaneroo Global</span>
-                          <ArrowUpRight className="h-3 w-3" />
-                        </a>
                       </div>
                     </motion.div>
                   )}

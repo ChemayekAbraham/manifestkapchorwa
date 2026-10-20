@@ -188,7 +188,7 @@ export default async function HomePage() {
                 <div className="rounded-2xl bg-neutral-900 p-4 shadow-sm border border-neutral-800 flex items-center justify-between gap-4 text-white hover:border-neutral-700 transition-colors">
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Phaneroo Global</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400">Phaneroo Services</span>
                       <span className="text-[10px] text-neutral-400">E.A.T</span>
                     </div>
                     <h4 className="font-heading text-sm font-bold text-white">Thurs 5PM – 9PM • Sun 9AM – 11AM & 11AM – 1:30PM</h4>

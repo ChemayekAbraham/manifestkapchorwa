@@ -88,16 +88,6 @@ export function Footer() {
                   Church Giving (MoMo / Airtel / Bank)
                 </Link>
               </li>
-              <li className="pt-1 border-t border-neutral-800">
-                <a
-                  href="https://phaneroo.org/live/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-highland-400 hover:text-white transition-colors flex items-center gap-1 font-medium"
-                >
-                  <span>Phaneroo Live Broadcasts ↗</span>
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -158,23 +148,6 @@ export function Footer() {
             <Link href="/contact" className="hover:text-white transition-colors">
               Contact
             </Link>
-            <span className="text-neutral-700 hidden sm:inline">|</span>
-            <a
-              href="https://phaneroo.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-highland-400 hover:text-white transition-colors"
-            >
-              Phaneroo Global ↗
-            </a>
-            <a
-              href="https://phaneroo.org/broadcast/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ochre-400 hover:text-white transition-colors"
-            >
-              Manifest TV ↗
-            </a>
           </div>
         </div>
       </div>
