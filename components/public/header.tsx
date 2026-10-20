@@ -183,10 +183,8 @@ export function Header() {
           mobileMenuOpen
             ? "py-3 bg-white text-neutral-900 border-b border-neutral-200 shadow-md"
             : scrolled
-            ? "py-2 sm:py-3 bg-white/90 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b border-neutral-200/70"
-            : isHome
-            ? "py-3 sm:py-4 bg-neutral-950/60 backdrop-blur-md text-white border-b border-white/10"
-            : "py-3 sm:py-4 bg-white/95 backdrop-blur-md shadow-xs border-b border-neutral-200/80"
+            ? "py-2 sm:py-3 bg-white/95 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] border-b border-neutral-200/80 text-neutral-900"
+            : "py-3 sm:py-4 bg-white/95 backdrop-blur-md shadow-xs border-b border-neutral-200/80 text-neutral-900"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -205,14 +203,8 @@ export function Header() {
               </div>
 
               {/* Sub-badge */}
-              <div
-                className={`border-l pl-2.5 hidden sm:block transition-colors ${
-                  !mobileMenuOpen && !scrolled && isHome
-                    ? "border-white/20 text-neutral-200"
-                    : "border-neutral-200 text-neutral-800"
-                }`}
-              >
-                <span className="text-[11px] font-black uppercase tracking-wider block leading-tight">
+              <div className="border-l border-neutral-200 pl-2.5 hidden sm:block">
+                <span className="text-[11px] font-black uppercase tracking-wider block leading-tight text-neutral-900">
                   Kapchorwa
                 </span>
                 <span className="text-[9px] font-bold uppercase tracking-widest text-highland-600 block">
@@ -222,13 +214,7 @@ export function Header() {
             </Link>
 
             {/* FLOATING PILL NAVIGATION (Desktop) */}
-            <nav
-              className={`hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full border transition-all duration-300 ${
-                !scrolled && isHome
-                  ? "bg-white/10 border-white/15 backdrop-blur-xl shadow-inner"
-                  : "bg-neutral-100/80 border-neutral-200/80 backdrop-blur-xl shadow-xs"
-              }`}
-            >
+            <nav className="hidden md:flex items-center gap-1 px-3 py-1.5 rounded-full border border-neutral-200/80 bg-neutral-100/80 backdrop-blur-xl shadow-xs">
               {MAIN_NAV.map((link) => {
                 const isActive = pathname === link.href;
                 const isHovered = hoveredNav === link.href;
@@ -245,11 +231,7 @@ export function Header() {
                     {isActive && (
                       <motion.div
                         layoutId="nav-active-pill"
-                        className={`absolute inset-0 rounded-full shadow-sm ${
-                          !scrolled && isHome
-                            ? "bg-gradient-to-r from-highland-500 to-highland-600 text-white"
-                            : "bg-white text-neutral-950 shadow-sm"
-                        }`}
+                        className="absolute inset-0 rounded-full shadow-xs bg-white text-neutral-950 border border-neutral-200/50"
                         transition={{ type: "spring", stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -257,9 +239,7 @@ export function Header() {
                     {!isActive && isHovered && (
                       <motion.div
                         layoutId="nav-hover-pill"
-                        className={`absolute inset-0 rounded-full ${
-                          !scrolled && isHome ? "bg-white/15" : "bg-neutral-200/70"
-                        }`}
+                        className="absolute inset-0 rounded-full bg-neutral-200/70"
                         transition={{ type: "spring", stiffness: 400, damping: 35 }}
                       />
                     )}
@@ -267,12 +247,8 @@ export function Header() {
                     <span
                       className={`relative z-10 transition-colors ${
                         isActive
-                          ? !scrolled && isHome
-                            ? "text-white font-black"
-                            : "text-neutral-950 font-black"
-                          : !scrolled && isHome
-                          ? "text-neutral-200 hover:text-white"
-                          : "text-neutral-600 hover:text-neutral-900"
+                          ? "text-neutral-950 font-black"
+                          : "text-neutral-600 hover:text-neutral-900 font-semibold"
                       }`}
                     >
                       {link.name}
@@ -288,15 +264,11 @@ export function Header() {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className={`relative px-4 py-1.5 text-xs font-bold rounded-full transition-all flex items-center gap-1.5 select-none ${
                     isMoreActive || dropdownOpen
-                      ? !scrolled && isHome
-                        ? "bg-white/20 text-white font-black"
-                        : "bg-white text-neutral-950 shadow-xs font-black"
-                      : !scrolled && isHome
-                      ? "text-neutral-200 hover:text-white"
-                      : "text-neutral-600 hover:text-neutral-900"
+                      ? "bg-white text-neutral-950 shadow-xs font-black border border-neutral-200/50"
+                      : "text-neutral-600 hover:text-neutral-900 font-semibold"
                   }`}
                 >
-                  <Compass className="h-3.5 w-3.5 text-highland-500" />
+                  <Compass className="h-3.5 w-3.5 text-highland-600" />
                   <span>Explore</span>
                   <ChevronDown
                     className={`h-3.5 w-3.5 transition-transform duration-200 ${
@@ -394,11 +366,7 @@ export function Header() {
                 <Button
                   size="sm"
                   variant="outline"
-                  className={`text-xs font-bold rounded-full transition-all ${
-                    !scrolled && isHome
-                      ? "text-white border-white/30 bg-white/10 hover:bg-white/20"
-                      : "text-neutral-700 border-neutral-200 hover:bg-neutral-100"
-                  }`}
+                  className="text-xs font-bold rounded-full transition-all text-neutral-700 border-neutral-200 bg-white hover:bg-neutral-100 shadow-xs"
                 >
                   <Heart className="h-3.5 w-3.5 mr-1 text-rose-500" />
                   <span>Give</span>
@@ -431,23 +399,13 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`h-9 w-9 rounded-full flex items-center justify-center transition-all ${
-                  mobileMenuOpen
-                    ? "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 border border-neutral-200 shadow-xs"
-                    : !scrolled && isHome
-                    ? "bg-white/20 text-white hover:bg-white/30 border border-white/25 shadow-xs"
-                    : "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 border border-neutral-200 shadow-xs"
-                }`}
+                className="h-9 w-9 rounded-full flex items-center justify-center transition-all bg-neutral-100 text-neutral-900 hover:bg-neutral-200 border border-neutral-200 shadow-xs"
                 aria-label="Toggle menu"
               >
                 {mobileMenuOpen ? (
                   <X className="h-5 w-5 text-neutral-900 stroke-[2.5]" />
                 ) : (
-                  <Menu
-                    className={`h-5 w-5 stroke-[2.5] ${
-                      !scrolled && isHome ? "text-white" : "text-neutral-900"
-                    }`}
-                  />
+                  <Menu className="h-5 w-5 stroke-[2.5] text-neutral-900" />
                 )}
               </button>
             </div>
