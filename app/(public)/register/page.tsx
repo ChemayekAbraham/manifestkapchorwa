@@ -202,7 +202,7 @@ function RegisterFormContent() {
                   />
                 </div>
 
-                <div>
+                <div className="sm:col-span-2">
                   <Select
                     label="Gender"
                     {...register("gender")}
@@ -212,15 +212,6 @@ function RegisterFormContent() {
                       { value: "FEMALE", label: "Female" },
                       { value: "OTHER", label: "Prefer not to say" },
                     ]}
-                  />
-                </div>
-
-                <div>
-                  <Input
-                    label="Date of Birth"
-                    type="date"
-                    {...register("dateOfBirth")}
-                    helperText="Helps us connect you with appropriate age ministries"
                   />
                 </div>
               </div>
