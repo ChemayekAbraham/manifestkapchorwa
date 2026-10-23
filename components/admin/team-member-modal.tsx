@@ -29,6 +29,60 @@ interface TeamMemberModalProps {
   onSuccess: () => void;
 }
 
+/**
+ * Compresses and resizes images client-side before sending to server/database.
+ * Reduces 5MB-20MB camera/phone photos to ~40KB-80KB portraits (max 800x1000 at 85% JPEG).
+ * Prevents Vercel 4.5MB payload limits and eliminates read-only filesystem errors.
+ */
+async function optimizeImageClient(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!file.type.startsWith("image/")) {
+      reject(new Error("Please upload a valid image file (JPEG, PNG, WebP)"));
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Failed to read image file"));
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.onerror = () => reject(new Error("Failed to decode image"));
+      img.onload = () => {
+        const MAX_WIDTH = 800;
+        const MAX_HEIGHT = 1000;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+          if (width / height > MAX_WIDTH / MAX_HEIGHT) {
+            height = Math.round((height * MAX_WIDTH) / width);
+            width = MAX_WIDTH;
+          } else {
+            width = Math.round((width * MAX_HEIGHT) / height);
+            height = MAX_HEIGHT;
+          }
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+          resolve(event.target?.result as string);
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        // Clear portrait quality with tiny footprint (~40-80 KB)
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+        resolve(dataUrl);
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 export function TeamMemberModal({
   open,
   onOpenChange,
@@ -77,16 +131,21 @@ export function TeamMemberModal({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset input so re-selecting same file works
+    e.target.value = "";
+
     setIsUploading(true);
     setError(null);
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
+      // 1. Optimize image in browser (resizes and compresses to small base64)
+      const optimizedDataUrl = await optimizeImageClient(file);
 
+      // 2. Upload via API to verify authentication & session permissions
       const res = await fetch("/api/admin/team/upload", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: optimizedDataUrl, filename: file.name }),
       });
 
       const data = await res.json();
@@ -94,8 +153,9 @@ export function TeamMemberModal({
         throw new Error(data.message || "Failed to upload photo");
       }
 
-      setImageUrl(data.url);
+      setImageUrl(data.url || optimizedDataUrl);
     } catch (err: any) {
+      console.error("Upload error:", err);
       setError(err?.message || "Error uploading image");
     } finally {
       setIsUploading(false);
@@ -222,6 +282,7 @@ export function TeamMemberModal({
                   src={imageUrl}
                   alt={name || "Preview"}
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               ) : (
@@ -236,7 +297,7 @@ export function TeamMemberModal({
               <div className="flex items-center gap-2">
                 <label className="cursor-pointer inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white border border-neutral-300 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 transition shadow-xs">
                   <Upload className="h-3.5 w-3.5 text-highland-700" />
-                  <span>{isUploading ? "Uploading..." : "Upload Photo From Device"}</span>
+                  <span>{isUploading ? "Optimizing & Uploading..." : "Upload Photo From Device"}</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -258,8 +319,10 @@ export function TeamMemberModal({
 
               <Input
                 placeholder="Or paste image URL (e.g. /images/team/name.jpg)"
-                value={imageUrl}
+                value={imageUrl.startsWith("data:image/") ? "Custom portrait uploaded from device" : imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
+                readOnly={imageUrl.startsWith("data:image/")}
+                className={imageUrl.startsWith("data:image/") ? "text-neutral-500 italic bg-neutral-100/60" : ""}
               />
 
               <div className="flex items-center gap-2 pt-1 text-xs text-neutral-500">
